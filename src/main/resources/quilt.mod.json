@@ -1,25 +1,29 @@
 {
 	"schema_version": 1,
 	"quilt_loader": {
-		"group": "com.example",
-		"id": "example_mod",
+		"group": "dev.sterner",
+		"id": "shuckhorror",
 		"version": "${version}",
 		"metadata": {
-			"name": "Mod Name",
+			"name": "Shuck Horrore",
 			"description": "A short description of your mod.",
 			"contributors": {
-				"Your name here": "Owner"
+				"cybercat5555": "Owner",
+				"MrSterner": "Author"
 			},
 			"contact": {
 				"homepage": "https://example.com/",
-				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
-				"sources": "https://github.com/QuiltMC/quilt-template-mod"
+				"issues": "https://github.com/mrsterner/shuck-horror/issues",
+				"sources": "https://github.com/mrsterner/shuck-horror"
 			},
-			"icon": "assets/example_mod/icon.png"
+			"icon": "assets/shuckhorror/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
+		"accessWidener": "shuckhorror.accesswidener",
 		"entrypoints": {
-			"init": "com.example.example_mod.ExampleMod"
+			"init": "dev.sterner.shuckhorror.ShuckHorror",
+			"client_init": "dev.sterner.shuckhorror.ShuckHorrorClient",
+			"fabric-datagen": "dev.sterner.shuckhorror.data.SHDataGen"
 		},
 		"depends": [
 			{
@@ -36,5 +40,5 @@
 			}
 		]
 	},
-	"mixin": "example_mod.mixins.json"
+	"mixin": "shuckhorror.mixins.json"
 }
