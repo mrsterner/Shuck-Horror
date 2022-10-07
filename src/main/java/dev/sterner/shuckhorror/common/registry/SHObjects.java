@@ -6,6 +6,7 @@ import dev.sterner.shuckhorror.common.item.SickleItem;
 import dev.sterner.shuckhorror.common.util.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.PlantBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -33,10 +34,10 @@ public class SHObjects {
 
 	public static final Block CORN_BREAD = register("corn_bread", new CornBreadBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
-	public static final Block WILD_MAIZE = register("wild_maze", new TallCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CANDY_CORN_CROP = register("candy_corn_block", new CandyCornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block CANDY_CORN_CROP = register("candy_corn_block", new CornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
 
 

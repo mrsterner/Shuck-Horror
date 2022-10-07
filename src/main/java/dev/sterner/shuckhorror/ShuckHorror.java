@@ -2,6 +2,7 @@ package dev.sterner.shuckhorror;
 
 import dev.sterner.shuckhorror.common.registry.SHEntityTypes;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
+import dev.sterner.shuckhorror.common.registry.SHWorldGenerators;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.slf4j.Logger;
@@ -14,5 +15,6 @@ public class ShuckHorror implements ModInitializer {
 	public void onInitialize(ModContainer mod) {
 		SHObjects.init();
 		SHEntityTypes.init();
+		SHWorldGenerators.init();
 	}
 }
