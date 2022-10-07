@@ -1,5 +1,6 @@
 package dev.sterner.shuckhorror;
 
+import dev.sterner.shuckhorror.common.registry.SHObjects;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.slf4j.Logger;
@@ -10,5 +11,6 @@ public class ShuckHorror implements ModInitializer {
 
 	@Override
 	public void onInitialize(ModContainer mod) {
+		SHObjects.init();
 	}
 }
