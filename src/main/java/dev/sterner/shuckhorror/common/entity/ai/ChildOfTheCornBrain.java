@@ -60,7 +60,7 @@ public class ChildOfTheCornBrain {
 
 	}
 
-	private static void addFightActivities(ChildOfTheCornEntity cornCoblinEntity, Brain<ChildOfTheCornEntity> brain) {
+	private static void addFightActivities(ChildOfTheCornEntity childOfTheCornEntity, Brain<ChildOfTheCornEntity> brain) {
 
 	}
 

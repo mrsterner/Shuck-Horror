@@ -3,11 +3,13 @@ package dev.sterner.shuckhorror.common.entity;
 import com.mojang.serialization.Dynamic;
 import dev.sterner.shuckhorror.common.entity.ai.CornCoblinBrain;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
@@ -40,5 +42,20 @@ public class CornCoblinEntity extends HostileEntity {
 	@Override
 	public Brain<CornCoblinEntity> getBrain() {
 		return (Brain<CornCoblinEntity>) super.getBrain();
+	}
+
+	public boolean isEnemy(LivingEntity entity) {//TODO
+		if (this.world == entity.world
+				&& EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity)
+				&& !this.isTeammate(entity)
+				&& entity.getType() != EntityType.ARMOR_STAND
+				&& entity.getType() != EntityType.WARDEN
+				&& !entity.isInvulnerable()
+				&& !entity.isDead()
+				&& this.world.getWorldBorder().contains(entity.getBoundingBox())) {
+			return true;
+		}
+
+		return false;
 	}
 }
