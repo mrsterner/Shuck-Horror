@@ -1,5 +1,6 @@
 package dev.sterner.shuckhorror.common.registry;
 
+import dev.sterner.shuckhorror.common.entity.ChildOfTheCornEntity;
 import dev.sterner.shuckhorror.common.entity.CornCoblinEntity;
 import dev.sterner.shuckhorror.common.util.Constants;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -21,6 +22,14 @@ public class SHEntityTypes {
 			.spawnGroup(SpawnGroup.MONSTER)
 			.entityFactory(CornCoblinEntity::new)
 			.defaultAttributes(CornCoblinEntity::createCornCoblinAttributes)
+			.dimensions(EntityDimensions.fixed(1f, 1f))
+			.build());
+
+	public static final EntityType<ChildOfTheCornEntity> CHILD_OF_THE_CORN = register("child_of_the_corn", FabricEntityTypeBuilder
+			.<ChildOfTheCornEntity>createMob()
+			.spawnGroup(SpawnGroup.MONSTER)
+			.entityFactory(ChildOfTheCornEntity::new)
+			.defaultAttributes(ChildOfTheCornEntity::createChildOfTheCornAttributes)
 			.dimensions(EntityDimensions.fixed(1f, 1f))
 			.build());
 
