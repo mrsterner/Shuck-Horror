@@ -1,6 +1,8 @@
 package dev.sterner.shuckhorror.common.registry;
 
 import dev.sterner.shuckhorror.common.block.*;
+import dev.sterner.shuckhorror.common.item.ScytheItem;
+import dev.sterner.shuckhorror.common.item.SickleItem;
 import dev.sterner.shuckhorror.common.util.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -26,8 +28,8 @@ public class SHObjects {
 	public static final Item CANDY_CORN = register("candy_corn", new Item(gen()));
 	public static final Item CREAM_CORN = register("cream_corn", new Item(gen()));
 	public static final Item BOWL_OF_CREAM_CORN = register("bowl_of_cream_corn", new Item(gen()));
-	public static final Item SICKLE = register("sickle", new Item(gen()));
-	public static final Item SCYTHE = register("scythe", new Item(gen()));
+	public static final Item SICKLE = register("sickle", new SickleItem(gen()));
+	public static final Item SCYTHE = register("scythe", new ScytheItem(gen()));
 
 	public static final Block CORN_BREAD = register("corn_bread", new CornBreadBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
