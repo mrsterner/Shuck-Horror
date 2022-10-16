@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "shuckhorror:block/cursed_corn_crop_stage0"
+    },
+    "age=1": {
+      "model": "shuckhorror:block/cursed_corn_crop_stage1"
+    },
+    "age=2": {
+      "model": "shuckhorror:block/cursed_corn_crop_stage2"
+    },
+    "age=3": {
+      "model": "shuckhorror:block/cursed_corn_crop_stage3"
+    },
+    "age=4": {
+      "model": "shuckhorror:block/cursed_corn_crop_stage4"
+    },
+    "age=5": {
+      "model": "shuckhorror:block/cursed_corn_crop_stage5"
+    }
+  }
+}

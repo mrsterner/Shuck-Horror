@@ -1,6 +1,7 @@
 package dev.sterner.shuckhorror.common.registry;
 
 import dev.sterner.shuckhorror.common.block.*;
+import dev.sterner.shuckhorror.common.item.CornItem;
 import dev.sterner.shuckhorror.common.item.ScytheItem;
 import dev.sterner.shuckhorror.common.item.SickleItem;
 import dev.sterner.shuckhorror.common.util.Constants;
@@ -20,12 +21,19 @@ public class SHObjects {
 	public static final Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
 	public static final Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
 
-	public static final Item CORN_COB = register("corn_cob", new Item(gen()));
+	public static final Item CORN_COB_1 = register("corn_1", new CornItem(gen(), 1, false));
+	public static final Item CORN_COB_2 = register("corn_2", new CornItem(gen(), 2, false));
+	public static final Item CORN_COB_3 = register("corn_3", new CornItem(gen(), 3, false));
+
+	public static final Item CURSED_CORN_1 = register("cursed_corn_1", new CornItem(gen(), 1, true));
+	public static final Item CURSED_CORN_2 = register("cursed_corn_2", new CornItem(gen(), 2, true));
+	public static final Item CURSED_CORN_3 = register("cursed_corn_3", new CornItem(gen(), 2, true));
+
 	public static final Item CORN_KERNELS = register("corn_kernels", new Item(gen()));
 	public static final Item CURSED_CORN_KERNELS = register("cursed_corn_kernels", new Item(gen()));
 	public static final Item POPCORN = register("popcorn", new Item(gen()));
 	public static final Item ROASTED_CORN = register("roasted_corn", new Item(gen()));
-	public static final Item CURSED_CORN_COB = register("cursed_corn_cob", new Item(gen()));
+
 	public static final Item CANDY_CORN = register("candy_corn", new Item(gen()));
 	public static final Item CREAM_CORN = register("cream_corn", new Item(gen()));
 	public static final Item BOWL_OF_CREAM_CORN = register("bowl_of_cream_corn", new Item(gen()));

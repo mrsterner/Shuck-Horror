@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "shuckhorror:block/candy_corn_crop_stage1"
+  }
+}
