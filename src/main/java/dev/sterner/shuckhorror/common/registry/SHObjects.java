@@ -24,10 +24,10 @@ public class SHObjects {
 
 	public static final Block CORN_BREAD = register("corn_bread", new CornBreadBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
-	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), false);
+	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), false);
+	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), false);
+	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), false);
 
 	public static final Item CORN_COB_1 = register("corn_1", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 1, false));
 	public static final Item CORN_COB_2 = register("corn_2", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 2, false));

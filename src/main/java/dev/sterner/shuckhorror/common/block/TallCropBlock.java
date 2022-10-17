@@ -125,7 +125,7 @@ public class TallCropBlock extends CropBlock {
 		if (state.get(HALF) == DoubleBlockHalf.LOWER) {
 			return LOWER_SHAPES[state.get(AGE)];
 		}
-		return Block.createCuboidShape(1, 0, 1, 15, 16, 15);
+		return Block.createCuboidShape(0, 0, 0, 16, 16, 16);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public class TallCropBlock extends CropBlock {
 		LOWER_SHAPES = new VoxelShape[]{
 				Block.createCuboidShape(0, -1, 0, 16, 5, 16),
 				Block.createCuboidShape(0, -1, 0, 16, 10, 16),
-				Block.createCuboidShape(0, -1, 0, 16, 15, 16),
+				Block.createCuboidShape(0, -1, 0, 16, 16, 16),
 				Block.createCuboidShape(0, -1, 0, 16, 16, 16),
 				Block.createCuboidShape(0, -1, 0, 16, 16, 16),
 				FULL_BOTTOM,
