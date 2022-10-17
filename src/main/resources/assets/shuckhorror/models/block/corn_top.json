@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "particle": "shuckhorror:block/corn_crop_5_stalks",
+    "all": "shuckhorror:block/empty"
+  }
+}

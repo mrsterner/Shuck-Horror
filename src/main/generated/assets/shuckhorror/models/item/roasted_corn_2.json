@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "shuckhorror:item/bowl_of_cream_corn"
+    "layer0": "shuckhorror:item/roasted_corn_2"
   }
 }

@@ -16,7 +16,7 @@ public class SHModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-
+		blockStateModelGenerator.registerTintableCross(SHObjects.WILD_MAIZE, BlockStateModelGenerator.TintType.TINTED);
 	}
 
 	@Override
@@ -29,12 +29,17 @@ public class SHModelProvider extends FabricModelProvider {
 		itemModelGenerator.register(SHObjects.CURSED_CORN_2, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.CURSED_CORN_3, Models.GENERATED);
 
+		itemModelGenerator.register(SHObjects.ROASTED_CORN_1, Models.GENERATED);
+		itemModelGenerator.register(SHObjects.ROASTED_CORN_2, Models.GENERATED);
+		itemModelGenerator.register(SHObjects.ROASTED_CORN_3, Models.GENERATED);
+
 		itemModelGenerator.register(SHObjects.CANDY_CORN, Models.GENERATED);
 
 		itemModelGenerator.register(SHObjects.CORN_KERNELS, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.CURSED_CORN_KERNELS, Models.GENERATED);
-		itemModelGenerator.register(SHObjects.BOWL_OF_CREAM_CORN, Models.GENERATED);
+		itemModelGenerator.register(SHObjects.GARMONBOZIA, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.POPCORN, Models.GENERATED);
+		itemModelGenerator.register(SHObjects.SICKLE, Models.HANDHELD);
 
 	}
 }
