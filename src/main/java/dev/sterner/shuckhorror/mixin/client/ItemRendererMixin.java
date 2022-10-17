@@ -1,4 +1,4 @@
-package dev.sterner.shuckhorror.mixin;
+package dev.sterner.shuckhorror.mixin.client;
 
 import dev.sterner.shuckhorror.common.item.ScytheItem;
 import net.minecraft.client.render.item.ItemModels;
@@ -15,13 +15,14 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 //From Aylyth, https://github.com/MoriyaShiine/aylyth/blob/09d0b3bae851e88eeb63b24d274058bd53aea162/src/main/java/moriyashiine/aylyth/mixin/client/ItemRendererMixin.java
 @Mixin(ItemRenderer.class)
 final class ItemRendererMixin {
 	@Shadow @Final private ItemModels models;
 
 	@Inject(method = "getHeldItemModel", at = @At("HEAD"), cancellable = true)
-	private void malum$getHeldItemModel(ItemStack stack, World world, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
+	private void shuck$getHeldItemModel(ItemStack stack, World world, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
 		if (stack.getItem() instanceof ScytheItem) {
 			BakedModel bakedModel = models.getModelManager().getModel(new ModelIdentifier("minecraft:trident_in_hand#inventory")); // this is the model type (not the texture), its insane that copy-pasting this works first try
 			ClientWorld clientWorld = world instanceof ClientWorld ? (ClientWorld) world : null;
