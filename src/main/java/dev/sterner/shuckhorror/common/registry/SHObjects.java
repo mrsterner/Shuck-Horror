@@ -8,10 +8,9 @@ import dev.sterner.shuckhorror.common.util.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PlantBlock;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
@@ -30,26 +29,44 @@ public class SHObjects {
 	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
-	public static final Item CORN_COB_1 = register("corn_1", new CornItem(gen(), 1, false));
-	public static final Item CORN_COB_2 = register("corn_2", new CornItem(gen(), 2, false));
-	public static final Item CORN_COB_3 = register("corn_3", new CornItem(gen(), 3, false));
+	public static final Item CORN_COB_1 = register("corn_1", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 1, false));
+	public static final Item CORN_COB_2 = register("corn_2", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 2, false));
+	public static final Item CORN_COB_3 = register("corn_3", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 3, false));
 
-	public static final Item CURSED_CORN_1 = register("cursed_corn_1", new CornItem(gen(), 1, true));
-	public static final Item CURSED_CORN_2 = register("cursed_corn_2", new CornItem(gen(), 2, true));
-	public static final Item CURSED_CORN_3 = register("cursed_corn_3", new CornItem(gen(), 2, true));
+	public static final Item CURSED_CORN_1 = register("cursed_corn_1", new CornItem(gen().food(Items.COOKED_CHICKEN.getFoodComponent()), 1, true));
+	public static final Item CURSED_CORN_2 = register("cursed_corn_2", new CornItem(gen().food(Items.COOKED_CHICKEN.getFoodComponent()), 2, true));
+	public static final Item CURSED_CORN_3 = register("cursed_corn_3", new CornItem(gen().food(Items.COOKED_CHICKEN.getFoodComponent()), 2, true));
 
-	public static final Item ROASTED_CORN_1 = register("roasted_corn_1", new Item(gen()));
-	public static final Item ROASTED_CORN_2 = register("roasted_corn_2", new Item(gen()));
-	public static final Item ROASTED_CORN_3 = register("roasted_corn_3", new Item(gen()));
+	public static final Item ROASTED_CORN_1 = register("roasted_corn_1", new Item(gen().food(Items.COOKED_CHICKEN.getFoodComponent())));
+	public static final Item ROASTED_CORN_2 = register("roasted_corn_2", new Item(gen().food(Items.COOKED_CHICKEN.getFoodComponent())));
+	public static final Item ROASTED_CORN_3 = register("roasted_corn_3", new Item(gen().food(Items.COOKED_CHICKEN.getFoodComponent())));
 
 	public static final Item CORN_KERNELS = register("corn_kernels", new AliasedBlockItem(CORN_CROP, gen()));
 	public static final Item CURSED_CORN_KERNELS = register("cursed_corn_kernels", new AliasedBlockItem(CURSED_CORN_CROP, gen()));
-	public static final Item POPCORN = register("popcorn", new Item(gen()));
+	public static final Item POPCORN = register("popcorn", new Item(gen()
+			.food(new FoodComponent.Builder()
+					.hunger(2)
+					.saturationModifier(0.1F)
+					.statusEffect(new StatusEffectInstance(StatusEffects.SATURATION, 20 * 5, 1), 1.0F)
+					.build()
+			)));
 
 
-	public static final Item CANDY_CORN = register("candy_corn", new Item(gen()));
-	public static final Item CREAM_CORN = register("cream_corn", new Item(gen()));
-	public static final Item GARMONBOZIA = register("garmonbozia", new Item(gen()));
+	public static final Item CANDY_CORN = register("candy_corn", new Item(gen()
+			.food(new FoodComponent.Builder()
+					.hunger(2)
+					.saturationModifier(0.1F)
+					.statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20 * 5, 1), 1.0F)
+					.alwaysEdible()
+					.build()
+			)));
+
+	public static final Item GARMONBOZIA = register("garmonbozia", new Item(gen()
+			.food(new FoodComponent.Builder()
+					.hunger(10)
+					.saturationModifier(0.6F)
+					.build()
+			)));
 	public static final Item SICKLE = register("sickle", new SickleItem(gen()));
 	public static final Item SCYTHE = register("scythe", new ScytheItem(gen()));
 
