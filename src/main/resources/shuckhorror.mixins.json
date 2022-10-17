@@ -9,7 +9,8 @@
     "accessor.SensorTypeAccessor"
   ],
   "client": [
-    "client.ItemRendererMixin"
+    "client.ItemRendererMixin",
+    "client.SoundSystemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

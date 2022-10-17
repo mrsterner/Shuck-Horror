@@ -7,5 +7,6 @@ public class SHDataGen implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		fabricDataGenerator.addProvider(SHModelProvider::new);
+		fabricDataGenerator.addProvider(SHBlockTagProvider::new);
 	}
 }
