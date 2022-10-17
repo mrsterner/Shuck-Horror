@@ -2,6 +2,7 @@ package dev.sterner.shuckhorror.common.entity.ai.goal;
 
 import dev.sterner.shuckhorror.common.block.CornCropBlock;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
+import dev.sterner.shuckhorror.common.util.SHUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.ai.goal.Goal;
@@ -47,11 +48,6 @@ public class CurseCornGoal extends Goal {
 		this.mob.getNavigation().stop();
 	}
 
-	private void transferBlockState(BlockPos pos){
-		int age = world.getBlockState(pos).get(CornCropBlock.AGE);
-		DoubleBlockHalf doubleBlockHalf = world.getBlockState(pos).get(CornCropBlock.HALF);
-		this.world.setBlockState(pos, SHObjects.CURSED_CORN_CROP.getDefaultState().with(CornCropBlock.AGE, age).with(CornCropBlock.HALF, doubleBlockHalf), 2);
-	}
 
 	@Override
 	public void tick() {
@@ -59,12 +55,12 @@ public class CurseCornGoal extends Goal {
 		if (this.world.getBlockState(targetPos).isOf(SHObjects.CORN_CROP)) {
 			if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
 				this.world.syncWorldEvent(2001, targetPos, Block.getRawIdFromState(SHObjects.CORN_CROP.getDefaultState()));
-				transferBlockState(targetPos);
+				SHUtils.transferBlockState(world, targetPos);
 
 				if(world.getBlockState(targetPos.up()).isOf(SHObjects.CORN_CROP)){
-					transferBlockState(targetPos.up());
+					SHUtils.transferBlockState(world, targetPos.up());
 				}else if(world.getBlockState(targetPos.down()).isOf(SHObjects.CORN_CROP)){
-					transferBlockState(targetPos.down());
+					SHUtils.transferBlockState(world, targetPos.down());
 				}
 			}
 			this.mob.onEatingGrass();
