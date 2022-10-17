@@ -7,9 +7,7 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.Task;
-import net.minecraft.entity.mob.warden.WardenEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 
 public class SHDigTask<E extends CornCoblinEntity> extends Task<E> {
 	public SHDigTask(int duration) {

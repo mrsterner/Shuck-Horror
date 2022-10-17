@@ -14,13 +14,11 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Unit;
 import net.minecraft.util.profiler.Profiler;
-import org.jetbrains.annotations.NotNull;
-import org.quiltmc.qsl.resource.loader.api.reloader.IdentifiableResourceReloader;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class ScytheItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer, IdentifiableResourceReloader {
+public class ScytheItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer, IdentifiableResourceReloadListener {
 	private final Identifier id;
 	private final Identifier itemId;
 	private ItemRenderer itemRenderer;
@@ -49,9 +47,10 @@ public class ScytheItemRenderer implements BuiltinItemRendererRegistry.DynamicIt
 	}
 
 	@Override
-	public @NotNull Identifier getQuiltId() {
+	public Identifier getFabricId() {
 		return this.id;
 	}
+
 
 	@Override
 	public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Profiler prepareProfiler, Profiler applyProfiler, Executor prepareExecutor, Executor applyExecutor) {

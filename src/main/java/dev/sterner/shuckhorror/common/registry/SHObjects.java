@@ -5,6 +5,7 @@ import dev.sterner.shuckhorror.common.item.CornItem;
 import dev.sterner.shuckhorror.common.item.ScytheItem;
 import dev.sterner.shuckhorror.common.item.SickleItem;
 import dev.sterner.shuckhorror.common.util.Constants;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PlantBlock;
@@ -13,7 +14,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,12 +22,12 @@ public class SHObjects {
 	public static final Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
 	public static final Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
 
-	public static final Block CORN_BREAD = register("corn_bread", new CornBreadBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block CORN_BREAD = register("corn_bread", new CornBreadBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
-	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
-	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(QuiltBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
+	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(FabricBlockSettings.copyOf(Blocks.ROSE_BUSH)), gen(), true);
 
 	public static final Item CORN_COB_1 = register("corn_1", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 1, false));
 	public static final Item CORN_COB_2 = register("corn_2", new CornItem(gen().food(Items.PORKCHOP.getFoodComponent()), 2, false));

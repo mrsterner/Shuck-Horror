@@ -13,7 +13,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.random.RandomGenerator;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -34,7 +34,7 @@ public class TallCropBlock extends CropBlock {
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
+	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		if(state.get(HALF) == DoubleBlockHalf.LOWER){
 			if (world.getBaseLightLevel(pos, 0) >= 9) {
 				int i = this.getAge(state);
@@ -110,7 +110,7 @@ public class TallCropBlock extends CropBlock {
 	}
 
 	@Override
-	public boolean canGrow(World world, RandomGenerator random, BlockPos pos, BlockState state) {
+	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
 		BlockState blockState = world.getBlockState(pos.up());
 		return blockState.getBlock() instanceof TallCropBlock || blockState.getMaterial().isReplaceable();
 	}

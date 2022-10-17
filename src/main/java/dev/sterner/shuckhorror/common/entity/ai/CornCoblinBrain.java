@@ -16,7 +16,6 @@ import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.warden.ForceUnmountTask;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Unit;
 import net.minecraft.util.math.MathHelper;
@@ -132,7 +131,7 @@ public class CornCoblinBrain {
 		brain.setTaskList(
 				Activity.DIG,
 				ImmutableList.of(
-						Pair.of(0, new ForceUnmountTask()),
+						Pair.of(0, new DismountVehicleTask()),
 						Pair.of(1, new SHDigTask<>(DIG_DURATION))),
 				ImmutableSet.of(
 						Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryModuleState.VALUE_ABSENT), Pair.of(MemoryModuleType.DIG_COOLDOWN, MemoryModuleState.VALUE_ABSENT)
@@ -167,9 +166,9 @@ public class CornCoblinBrain {
 			return brain.getOptionalMemory(MemoryModuleType.NEAREST_VISIBLE_TARGETABLE_PLAYER);
 		}
 		if (brain.hasMemoryModule(MemoryModuleType.VISIBLE_MOBS)) {
-			Optional<VisibleLivingEntitiesCache> visibleLivingEntitiesCache = cornCoblinEntity.getBrain().getOptionalMemory(MemoryModuleType.VISIBLE_MOBS);
+			Optional<LivingTargetCache> visibleLivingEntitiesCache = cornCoblinEntity.getBrain().getOptionalMemory(MemoryModuleType.VISIBLE_MOBS);
 			if(visibleLivingEntitiesCache.isPresent()){
-				return visibleLivingEntitiesCache.get().method_38975(entity -> entity.getType() == EntityType.PLAYER && !entity.isSubmergedInWater());
+				return visibleLivingEntitiesCache.get().findFirst(entity -> entity.getType() == EntityType.PLAYER && !entity.isSubmergedInWater());
 			}
 		}
 		return Optional.empty();

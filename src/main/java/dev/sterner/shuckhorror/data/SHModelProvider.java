@@ -3,11 +3,9 @@ package dev.sterner.shuckhorror.data;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.model.BlockStateModelGenerator;
-import net.minecraft.data.client.model.Model;
-import net.minecraft.data.client.model.Models;
-import net.minecraft.state.property.Properties;
+import net.minecraft.data.client.Models;
 
 public class SHModelProvider extends FabricModelProvider {
 	public SHModelProvider(FabricDataGenerator dataGenerator) {

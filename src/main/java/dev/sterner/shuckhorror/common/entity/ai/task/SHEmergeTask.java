@@ -34,7 +34,7 @@ public class SHEmergeTask <E extends CornCoblinEntity> extends Task<E> {
 	}
 
 	protected void finishRunning(ServerWorld serverWorld, E wardenEntity, long l) {
-		if (wardenEntity.hasPose(EntityPose.EMERGING)) {
+		if (wardenEntity.isInPose(EntityPose.EMERGING)) {
 			wardenEntity.setPose(EntityPose.STANDING);
 		}
 
