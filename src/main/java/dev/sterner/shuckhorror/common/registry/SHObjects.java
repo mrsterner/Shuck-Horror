@@ -21,15 +21,19 @@ public class SHObjects {
 	public static final Map<Block, Identifier> BLOCKS = new LinkedHashMap<>();
 	public static final Map<Item, Identifier> ITEMS = new LinkedHashMap<>();
 
+	//Settings
 	public static final AbstractBlock.Settings CORN = AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offsetType(AbstractBlock.OffsetType.XZ);
 
-	public static final Block CORN_BREAD_BLOCK = register("corn_bread", new CornBreadBlock(CORN), genSettings(), false);
-	public static final Item CORN_BREAD = register("corn_bread", new AliasedBlockItem(CORN_BREAD_BLOCK, genSettings()));
-
+	//Blocks
 	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(CORN), genSettings(), false);
 	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(CORN), genSettings(), false);
 	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(CORN), genSettings(), false);
 	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(CORN), genSettings(), false);
+
+	public static final Block CORN_BREAD_BLOCK = register("corn_bread", new CornBreadBlock(CORN), genSettings(), false);
+
+	//Items
+	public static final Item CORN_BREAD = register("corn_bread", new AliasedBlockItem(CORN_BREAD_BLOCK, genSettings()));
 
 	public static final Item CORN_COB_1 = register("corn_1", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 1, false));
 	public static final Item CORN_COB_2 = register("corn_2", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 2, false));

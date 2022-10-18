@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "shuckhorror:corn_kernels"
+    },
+    {
+      "item": "shuckhorror:corn_kernels"
+    },
+    {
+      "item": "shuckhorror:corn_kernels"
+    }
+  ],
+  "result": {
+    "item": "shuckhorror:corn_1"
+  }
+}
