@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.ItemTags;
@@ -20,13 +21,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 
-public class CornBreadBlock extends CakeBlock {
-	public static final IntProperty BITES;
+public class CornBreadBlock extends Block {
+	public static final IntProperty CORN_BITES;
 	protected static final VoxelShape[] BITES_TO_SHAPE;
 	public static final int DEFAULT_COMPARATOR_OUTPUT;
 
 	public CornBreadBlock(Settings settings) {
 		super(settings);
+		this.setDefaultState(this.getDefaultState().with(CORN_BITES, 0));
 	}
 
 	@Override
@@ -50,10 +52,10 @@ public class CornBreadBlock extends CakeBlock {
 		} else {
 			player.incrementStat(Stats.EAT_CAKE_SLICE);
 			player.getHungerManager().add(2, 0.1F);
-			int i = state.get(BITES);
+			int i = state.get(CORN_BITES);
 			world.emitGameEvent(player, GameEvent.EAT, pos);
 			if (i < 6) {
-				world.setBlockState(pos, state.with(BITES, i + 1), 3);
+				world.setBlockState(pos, state.with(CORN_BITES, i + 1), 3);
 			} else {
 				world.removeBlock(pos, false);
 				world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
@@ -64,16 +66,32 @@ public class CornBreadBlock extends CakeBlock {
 	}
 
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return BITES_TO_SHAPE[state.get(BITES)];
+		return BITES_TO_SHAPE[state.get(CORN_BITES)];
 	}
 
 	public static int getComparatorOutput(int bites) {
-		return (7 - bites) * 2;
+		return (4 - bites) * 2;
 	}
 
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		builder.add(CORN_BITES);
+	}
+
+	@Override
+	public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+		return getComparatorOutput(state.get(CORN_BITES));
+	}
+
+
+
 	static {
-		BITES = Properties.BITES;
+		CORN_BITES = IntProperty.of("corn_bites", 0, 3);
 		DEFAULT_COMPARATOR_OUTPUT = getComparatorOutput(0);
-		BITES_TO_SHAPE = new VoxelShape[]{Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0), Block.createCuboidShape(3.0, 0.0, 1.0, 15.0, 8.0, 15.0), Block.createCuboidShape(5.0, 0.0, 1.0, 15.0, 8.0, 15.0), Block.createCuboidShape(7.0, 0.0, 1.0, 15.0, 8.0, 15.0), Block.createCuboidShape(9.0, 0.0, 1.0, 15.0, 8.0, 15.0), Block.createCuboidShape(11.0, 0.0, 1.0, 15.0, 8.0, 15.0), Block.createCuboidShape(13.0, 0.0, 1.0, 15.0, 8.0, 15.0)};
+		BITES_TO_SHAPE = new VoxelShape[]{
+				Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+				Block.createCuboidShape(3.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+				Block.createCuboidShape(5.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+				Block.createCuboidShape(7.0, 0.0, 1.0, 15.0, 8.0, 15.0)};
 	}
 }
