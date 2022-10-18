@@ -35,10 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class CornCoblinEntity extends HostileEntity {
-	/**
-	 * Pose Flags Indexes: 0 - EMERGING, 1 - NOTHING, 2 - DIGGING
-	 */
-	private static final TrackedData<Byte> POSE_FLAGS = DataTracker.registerData(CornCoblinEntity.class, TrackedDataHandlerRegistry.BYTE);
 
 	public CornCoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
@@ -68,36 +64,6 @@ public class CornCoblinEntity extends HostileEntity {
 		}
 	}
 
-	@Override
-	protected void initDataTracker() {
-		dataTracker.startTracking(POSE_FLAGS, (byte) 0b0000_0000);
-		super.initDataTracker();
-	}
-
-	@Override
-	public void writeCustomDataToNbt(NbtCompound nbt) {
-		super.writeCustomDataToNbt(nbt);
-		nbt.putByte(Constants.NBT.POSE_FLAGS, dataTracker.get(POSE_FLAGS));
-	}
-
-	@Override
-	public void readCustomDataFromNbt(NbtCompound nbt) {
-		super.readCustomDataFromNbt(nbt);
-		dataTracker.set(POSE_FLAGS, nbt.getByte(Constants.NBT.POSE_FLAGS));
-	}
-
-	protected void setPoseFlag(int index, boolean value) {
-		byte b = this.dataTracker.get(POSE_FLAGS);
-		if (value) {
-			this.dataTracker.set(POSE_FLAGS, (byte) (b | 1 << index));
-		} else {
-			this.dataTracker.set(POSE_FLAGS, (byte) (b & ~(1 << index)));
-		}
-	}
-
-	protected boolean getPoseFlag(int index) {
-		return (this.dataTracker.get(POSE_FLAGS) & 1 << index) != 0;
-	}
 
 	@Override
 	public boolean isPushable() {
