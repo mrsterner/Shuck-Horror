@@ -1,10 +1,8 @@
 package dev.sterner.shuckhorror.common.entity.ai.goal;
 
-import dev.sterner.shuckhorror.common.block.CornCropBlock;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import dev.sterner.shuckhorror.common.util.SHUtils;
 import net.minecraft.block.Block;
-import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.util.math.BlockPos;

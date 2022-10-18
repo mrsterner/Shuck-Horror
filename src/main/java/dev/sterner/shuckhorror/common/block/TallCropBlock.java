@@ -2,7 +2,6 @@ package dev.sterner.shuckhorror.common.block;
 
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;

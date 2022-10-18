@@ -1,14 +1,9 @@
 package dev.sterner.shuckhorror.common.util;
 import dev.sterner.shuckhorror.common.block.CornCropBlock;
-import dev.sterner.shuckhorror.common.registry.SHObjects;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Iterator;
 
 public class SHUtils {
 

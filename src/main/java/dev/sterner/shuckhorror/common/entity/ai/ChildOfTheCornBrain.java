@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Dynamic;
 import dev.sterner.shuckhorror.common.entity.ChildOfTheCornEntity;
-import dev.sterner.shuckhorror.common.entity.CornCoblinEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.Activity;
 import net.minecraft.entity.ai.brain.Brain;

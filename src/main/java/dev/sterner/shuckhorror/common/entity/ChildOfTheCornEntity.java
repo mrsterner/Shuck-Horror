@@ -2,7 +2,6 @@ package dev.sterner.shuckhorror.common.entity;
 
 import com.mojang.serialization.Dynamic;
 import dev.sterner.shuckhorror.common.entity.ai.ChildOfTheCornBrain;
-import dev.sterner.shuckhorror.common.entity.ai.CornCoblinBrain;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;

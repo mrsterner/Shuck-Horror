@@ -3,9 +3,7 @@ package dev.sterner.shuckhorror.mixin;
 import dev.sterner.shuckhorror.api.event.BeeGrowCropEvent;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.sound.SoundEvent;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
