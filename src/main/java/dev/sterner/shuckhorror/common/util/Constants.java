@@ -20,4 +20,9 @@ public class Constants {
 	public static class Tags {
 		public static final TagKey<Block> CORN_COBLING_BLOCK_DESTROYABLE = TagKey.of(Registry.BLOCK_KEY, id("corn_coblin_blocks_destroyable"));
 	}
+
+	public static class NBT {
+
+		public static final String POSE_FLAGS = "pose_flag";
+	}
 }

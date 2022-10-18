@@ -1,22 +1,151 @@
 package dev.sterner.shuckhorror.common.entity;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import dev.sterner.shuckhorror.common.entity.ai.CornCoblinBrain;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import dev.sterner.shuckhorror.common.util.Constants;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.brain.Activity;
 import net.minecraft.entity.ai.brain.Brain;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.ai.brain.task.SonicBoomTask;
+import net.minecraft.entity.ai.brain.task.UpdateAttackTargetTask;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.ProjectileDamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.WardenEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Unit;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 
 public class CornCoblinEntity extends HostileEntity {
+	/**
+	 * Pose Flags Indexes: 0 - EMERGING, 1 - NOTHING, 2 - DIGGING
+	 */
+	private static final TrackedData<Byte> POSE_FLAGS = DataTracker.registerData(CornCoblinEntity.class, TrackedDataHandlerRegistry.BYTE);
+
 	public CornCoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
+	}
+
+	@Nullable
+	@Override
+	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
+		this.getBrain().remember(MemoryModuleType.DIG_COOLDOWN, Unit.INSTANCE, 300L);
+		if (spawnReason != SpawnReason.CHUNK_GENERATION) {
+			this.setPose(EntityPose.EMERGING);
+			this.getBrain().remember(MemoryModuleType.IS_EMERGING, Unit.INSTANCE, CornCoblinBrain.EMERGE_DURATION);
+		}
+		return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+	}
+
+	@Override
+	public Packet<?> createSpawnPacket() {
+		return new EntitySpawnS2CPacket(this, this.isInPose(EntityPose.EMERGING) ? 1 : 0);
+	}
+
+	@Override
+	public void onSpawnPacket(EntitySpawnS2CPacket packet) {
+		super.onSpawnPacket(packet);
+		if (packet.getEntityData() == 1) {
+			this.setPose(EntityPose.EMERGING);
+		}
+	}
+
+	@Override
+	protected void initDataTracker() {
+		dataTracker.startTracking(POSE_FLAGS, (byte) 0b0000_0000);
+		super.initDataTracker();
+	}
+
+	@Override
+	public void writeCustomDataToNbt(NbtCompound nbt) {
+		super.writeCustomDataToNbt(nbt);
+		nbt.putByte(Constants.NBT.POSE_FLAGS, dataTracker.get(POSE_FLAGS));
+	}
+
+	@Override
+	public void readCustomDataFromNbt(NbtCompound nbt) {
+		super.readCustomDataFromNbt(nbt);
+		dataTracker.set(POSE_FLAGS, nbt.getByte(Constants.NBT.POSE_FLAGS));
+	}
+
+	protected void setPoseFlag(int index, boolean value) {
+		byte b = this.dataTracker.get(POSE_FLAGS);
+		if (value) {
+			this.dataTracker.set(POSE_FLAGS, (byte) (b | 1 << index));
+		} else {
+			this.dataTracker.set(POSE_FLAGS, (byte) (b & ~(1 << index)));
+		}
+	}
+
+	protected boolean getPoseFlag(int index) {
+		return (this.dataTracker.get(POSE_FLAGS) & 1 << index) != 0;
+	}
+
+	@Override
+	public boolean isPushable() {
+		return !this.isDiggingOrEmerging() && super.isPushable();
+	}
+
+	@Override
+	public boolean damage(DamageSource source, float amount) {
+		boolean bl = super.damage(source, amount);
+		if (!this.world.isClient && !this.isAiDisabled() && !this.isDiggingOrEmerging()) {
+			Entity entity = source.getAttacker();
+			if (this.brain.getOptionalMemory(MemoryModuleType.ATTACK_TARGET).isEmpty() && entity instanceof LivingEntity livingEntity && (!(source instanceof ProjectileDamageSource) || this.isInRange(livingEntity, 3.0))) {
+				UpdateAttackTargetTask.updateAttackTarget(this, livingEntity);
+			}
+		}
+
+		return bl;
+	}
+
+	@Override
+	public void onTrackedDataSet(TrackedData<?> data) {
+		if (POSE.equals(data)) {
+			switch (this.getPose()) {
+				//TODO case EMERGING ->  this.emergingAnimationState.start(this.age);
+				//TODO case DIGGING ->   this.diggingAnimationState.start(this.age);
+			}
+		}
+
+		super.onTrackedDataSet(data);
+	}
+
+	@Override
+	public SoundCategory getSoundCategory() {
+		return SoundCategory.HOSTILE;
+	}
+
+	@Override
+	public boolean canBeLeashedBy(PlayerEntity player) {
+		return false;
+	}
+
+	@Override
+	public boolean isInvulnerableTo(DamageSource source) {
+		return this.isDiggingOrEmerging() && !source.isOutOfWorld() || super.isInvulnerableTo(source);
+	}
+
+	private boolean isDiggingOrEmerging() {
+		return this.isInPose(EntityPose.DIGGING) || this.isInPose(EntityPose.EMERGING);
 	}
 
 	protected void mobTick() {
@@ -26,6 +155,7 @@ public class CornCoblinEntity extends HostileEntity {
 		CornCoblinBrain.updateActivities(this);
 		super.mobTick();
 	}
+
 
 	public static DefaultAttributeContainer.Builder createCornCoblinAttributes() {
 		return MobEntity.createMobAttributes()
@@ -39,6 +169,7 @@ public class CornCoblinEntity extends HostileEntity {
 		return CornCoblinBrain.create(this, dynamic);
 	}
 
+	@SuppressWarnings("all")
 	@Override
 	public Brain<CornCoblinEntity> getBrain() {
 		return (Brain<CornCoblinEntity>) super.getBrain();
