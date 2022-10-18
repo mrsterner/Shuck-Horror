@@ -9,5 +9,6 @@ public class SHDataGen implements DataGeneratorEntrypoint {
 		fabricDataGenerator.addProvider(SHModelProvider::new);
 		fabricDataGenerator.addProvider(SHBlockTagProvider::new);
 		fabricDataGenerator.addProvider(SHRecipeProvider::new);
+		fabricDataGenerator.addProvider(SHBlockLootTableProvider::new);
 	}
 }
