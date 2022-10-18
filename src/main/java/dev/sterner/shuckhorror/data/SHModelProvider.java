@@ -1,12 +1,13 @@
 package dev.sterner.shuckhorror.data;
 
+import dev.sterner.shuckhorror.common.block.CornBreadBlock;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.model.BlockStateModelGenerator;
-import net.minecraft.data.client.model.Model;
-import net.minecraft.data.client.model.Models;
+import net.minecraft.data.client.model.*;
+import net.minecraft.item.Items;
 import net.minecraft.state.property.Properties;
 
 public class SHModelProvider extends FabricModelProvider {
@@ -17,6 +18,7 @@ public class SHModelProvider extends FabricModelProvider {
 	@Override
 	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 		blockStateModelGenerator.registerTintableCross(SHObjects.WILD_MAIZE, BlockStateModelGenerator.TintType.TINTED);
+		registerCake(blockStateModelGenerator);
 	}
 
 	@Override
@@ -41,5 +43,19 @@ public class SHModelProvider extends FabricModelProvider {
 		itemModelGenerator.register(SHObjects.POPCORN, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.SICKLE, Models.HANDHELD);
 
+		itemModelGenerator.register(SHObjects.CORN_BREAD, Models.GENERATED);
+
+	}
+
+	private void registerCake(BlockStateModelGenerator blockStateModelGenerator) {
+		blockStateModelGenerator.blockStateCollector
+				.accept(VariantsBlockStateSupplier
+						.create(SHObjects.CORN_BREAD_BLOCK)
+						.coordinate(BlockStateVariantMap
+								.create(CornBreadBlock.CORN_BITES)
+								.register(0, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(SHObjects.CORN_BREAD_BLOCK)))
+								.register(1, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(SHObjects.CORN_BREAD_BLOCK, "_slice1")))
+								.register(2, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(SHObjects.CORN_BREAD_BLOCK, "_slice2")))
+								.register(3, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(SHObjects.CORN_BREAD_BLOCK, "_slice3")))));
 	}
 }

@@ -27,8 +27,8 @@ public class  CornItem extends Item {
 
 	private ItemStack getNextEatingStack(int variant, boolean cursed){
 		return new ItemStack(switch (variant) {
-			case 2 -> cursed ? SHObjects.CURSED_CORN_1: SHObjects.CORN_COB_1;
-			case 3 -> cursed ? SHObjects.CURSED_CORN_2: SHObjects.CORN_COB_2;
+			case 1 -> cursed ? SHObjects.CURSED_CORN_2: SHObjects.CORN_COB_2;
+			case 2 -> cursed ? SHObjects.CURSED_CORN_3: SHObjects.CORN_COB_3;
 			default -> ItemStack.EMPTY.getItem();
 		});
 	}

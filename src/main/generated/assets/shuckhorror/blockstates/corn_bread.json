@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "corn_bites=0": {
+      "model": "shuckhorror:block/corn_bread"
+    },
+    "corn_bites=1": {
+      "model": "shuckhorror:block/corn_bread_slice1"
+    },
+    "corn_bites=2": {
+      "model": "shuckhorror:block/corn_bread_slice2"
+    },
+    "corn_bites=3": {
+      "model": "shuckhorror:block/corn_bread_slice3"
+    }
+  }
+}
