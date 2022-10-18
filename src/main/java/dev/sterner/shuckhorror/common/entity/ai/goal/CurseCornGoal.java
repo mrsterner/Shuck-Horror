@@ -55,12 +55,12 @@ public class CurseCornGoal extends Goal {
 		if (this.world.getBlockState(targetPos).isOf(SHObjects.CORN_CROP)) {
 			if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
 				this.world.syncWorldEvent(2001, targetPos, Block.getRawIdFromState(SHObjects.CORN_CROP.getDefaultState()));
-				SHUtils.transferBlockState(world, targetPos);
+				SHUtils.transferBlockState(world, targetPos, SHObjects.CURSED_CORN_CROP.getDefaultState());
 
 				if(world.getBlockState(targetPos.up()).isOf(SHObjects.CORN_CROP)){
-					SHUtils.transferBlockState(world, targetPos.up());
+					SHUtils.transferBlockState(world, targetPos.up(), SHObjects.CURSED_CORN_CROP.getDefaultState());
 				}else if(world.getBlockState(targetPos.down()).isOf(SHObjects.CORN_CROP)){
-					SHUtils.transferBlockState(world, targetPos.down());
+					SHUtils.transferBlockState(world, targetPos.down(), SHObjects.CURSED_CORN_CROP.getDefaultState());
 				}
 			}
 			this.mob.onEatingGrass();

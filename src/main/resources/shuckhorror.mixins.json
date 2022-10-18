@@ -6,6 +6,8 @@
   "mixins": [
     "LivingEntityMixin",
     "WitchEntityMixin",
+    "GrowCropsGoalMixin",
+    "PollinateGoalMixin",
     "accessor.SensorTypeAccessor"
   ],
   "client": [
