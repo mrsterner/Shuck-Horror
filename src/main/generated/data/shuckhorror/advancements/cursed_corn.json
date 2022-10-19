@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "destroy_cursed_corn": {
+      "conditions": {},
+      "trigger": "shuckhorror:block_break"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:shuckhorrortextures/item/corn_cob_1.png",
+    "description": {
+      "translate": "shuckhorror.advancement.cursed_corn.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "shuckhorror:cursed_corn_1"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.cursed_corn"
+    }
+  },
+  "requirements": [
+    [
+      "destroy_cursed_corn"
+    ]
+  ]
+}

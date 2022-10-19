@@ -1,0 +1,30 @@
+{
+  "parent": "shuckhorror:root",
+  "criteria": {
+    "encounter_child_of_the_corn": {
+      "conditions": {},
+      "trigger": "shuckhorror:entity_target"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:shuckhorrortextures/item/corn_cob_1.png",
+    "description": {
+      "translate": "shuckhorror.advancement.child_of_the_corn.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "shuckhorror:cursed_corn_1"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.child_of_the_corn"
+    }
+  },
+  "requirements": [
+    [
+      "encounter_child_of_the_corn"
+    ]
+  ]
+}

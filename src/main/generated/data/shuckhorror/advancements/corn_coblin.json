@@ -1,0 +1,40 @@
+{
+  "parent": "shuckhorror:root",
+  "criteria": {
+    "encounter_corn_coblin": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "shuckhorror:corn_coblin"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:shuckhorrortextures/item/corn_cob_1.png",
+    "description": {
+      "translate": "shuckhorror.advancement.corn_coblin.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "shuckhorror:popcorn"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.corn_coblin"
+    }
+  },
+  "requirements": [
+    [
+      "encounter_corn_coblin"
+    ]
+  ]
+}

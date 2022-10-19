@@ -1,6 +1,7 @@
 package dev.sterner.shuckhorror.common.entity;
 
 import com.mojang.serialization.Dynamic;
+import dev.sterner.shuckhorror.api.criteria.SHCriteria;
 import dev.sterner.shuckhorror.common.entity.ai.ChildOfTheCornBrain;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.Brain;
@@ -8,6 +9,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
@@ -21,6 +24,10 @@ public class ChildOfTheCornEntity extends HostileEntity {
 		this.getBrain().tick((ServerWorld)this.world, this);
 		this.world.getProfiler().pop();
 		ChildOfTheCornBrain.updateActivities(this);
+		if(getTarget() instanceof PlayerEntity player){
+			SHCriteria.ENTITY_TARGET_PLAYER.trigger((ServerPlayerEntity) player, this.getType());
+
+		}
 		super.mobTick();
 	}
 
@@ -39,4 +46,6 @@ public class ChildOfTheCornEntity extends HostileEntity {
 	public Brain<ChildOfTheCornEntity> getBrain() {
 		return (Brain<ChildOfTheCornEntity>) super.getBrain();
 	}
+
+
 }

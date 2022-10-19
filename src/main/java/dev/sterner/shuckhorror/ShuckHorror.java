@@ -1,5 +1,6 @@
 package dev.sterner.shuckhorror;
 
+import dev.sterner.shuckhorror.api.criteria.SHCriteria;
 import dev.sterner.shuckhorror.api.event.BeeGrowCropEvent;
 import dev.sterner.shuckhorror.api.event.EntityDeathEvent;
 import dev.sterner.shuckhorror.common.registry.SHEntityTypes;
@@ -23,6 +24,7 @@ public class ShuckHorror implements ModInitializer {
 		SHEntityTypes.init();
 		SHWorldGenerators.init();
 		SHBrains.init();
+		SHCriteria.init();
 
 		EntityDeathEvent.ON_ENTITY_DEATH.register(this::curseCornOnDeath);
 		BeeGrowCropEvent.ON_BEE_GROW_CROP.register(this::candyCornBeePollination);

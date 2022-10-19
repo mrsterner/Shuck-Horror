@@ -123,6 +123,8 @@ public class CornCoblinEntity extends HostileEntity {
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
 	}
 
+
+
 	@Override
 	protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
 		return CornCoblinBrain.create(this, dynamic);
