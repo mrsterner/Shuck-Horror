@@ -1,5 +1,5 @@
 {
-  "parent": "shuckhorror:shuckhorror/child_of_the_corn",
+  "parent": "shuckhorror:shuckhorror/you_shall_also_reap",
   "criteria": {
     "strike_entity_with_sickle": {
       "conditions": {
@@ -18,7 +18,7 @@
     "description": {
       "translate": "shuckhorror.advancement.grim_harvest.desc"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
       "item": "minecraft:skeleton_skull"

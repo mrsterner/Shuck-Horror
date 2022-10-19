@@ -3,7 +3,6 @@ package dev.sterner.shuckhorror.data;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
-import net.minecraft.data.server.AdvancementProvider;
 
 import java.util.function.Consumer;
 

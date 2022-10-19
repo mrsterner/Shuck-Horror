@@ -38,7 +38,7 @@
     "description": {
       "translate": "shuckhorror.advancement.cornn_flaek.desc"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
       "item": "shuckhorror:corn_bread"
