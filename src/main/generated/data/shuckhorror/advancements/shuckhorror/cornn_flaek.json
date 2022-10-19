@@ -1,0 +1,65 @@
+{
+  "parent": "shuckhorror:shuckhorror/root",
+  "criteria": {
+    "corn_bread": {
+      "conditions": {
+        "item": {
+          "items": [
+            "shuckhorror:corn_bread"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "cursed_corn_1": {
+      "conditions": {
+        "item": {
+          "items": [
+            "shuckhorror:cursed_corn_1"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    },
+    "roasted_corn_1": {
+      "conditions": {
+        "item": {
+          "items": [
+            "shuckhorror:roasted_corn_1"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "shuckhorror.advancement.cornn_flaek.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "shuckhorror:corn_bread"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.cornn_flaek"
+    }
+  },
+  "requirements": [
+    [
+      "cursed_corn_1"
+    ],
+    [
+      "roasted_corn_1"
+    ],
+    [
+      "corn_bread"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

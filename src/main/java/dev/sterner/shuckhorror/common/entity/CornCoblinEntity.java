@@ -115,7 +115,7 @@ public class CornCoblinEntity extends HostileEntity {
 		this.world.getProfiler().pop();
 		CornCoblinBrain.updateActivities(this);
 		if(getTarget() instanceof PlayerEntity player){
-			SHCriteria.ENTITY_TARGET_PLAYER.trigger((ServerPlayerEntity) player, this.getType());
+			SHCriteria.ENTITY_TARGET_PLAYER.trigger((ServerPlayerEntity) player, this);
 		}
 		super.mobTick();
 	}

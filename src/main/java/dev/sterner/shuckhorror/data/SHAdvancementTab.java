@@ -9,22 +9,39 @@ import dev.sterner.shuckhorror.data.criterion.OnEntityTargetPlayerCriteria;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementDisplay;
 import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.advancement.AdvancementRewards;
+import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.advancement.criterion.OnKilledCriterion;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.EndTabAdvancementGenerator;
+import net.minecraft.data.server.HusbandryTabAdvancementGenerator;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.FrogVariant;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.DamageSourcePredicate;
+import net.minecraft.predicate.entity.EntityFlagsPredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.predicate.entity.TypeSpecificPredicate;
+import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.function.Consumer;
 
 public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
-	static AdvancementDisplay makeDisplay(ItemConvertible item, String titleKey) {
+	private static final Item[] FOOD_ITEMS = new Item[]{
+			SHObjects.CURSED_CORN_1,
+			SHObjects.ROASTED_CORN_1,
+			SHObjects.CORN_BREAD};
+
+
+	public static AdvancementDisplay makeDisplay(ItemConvertible item, String titleKey) {
 		return new AdvancementDisplay(item.asItem().getDefaultStack(),
 				Text.translatable(Constants.MODID + ".advancement." + titleKey),
 				Text.translatable(Constants.MODID + ".advancement." + titleKey + ".desc"),
@@ -46,19 +63,19 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 
 		Advancement encounterCuredCornCrop = Advancement.Builder.create()
 				.display(makeDisplay(SHObjects.CURSED_CORN_1, "cursed_corn"))
-				.criterion("destroy_cursed_corn", new BlockBreakCriteria.Conditions(EntityPredicate.Extended.EMPTY, SHObjects.CURSED_CORN_CROP))
+				.criterion("destroy_cursed_corn", BlockBreakCriteria.Conditions.create(SHObjects.CURSED_CORN_CROP))
 				.parent(root)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/cursed_corn");
 
 		Advancement encounterCornCoblin = Advancement.Builder.create()
 				.display(makeDisplay(SHObjects.POPCORN, "corn_coblin"))
-				.criterion("encounter_corn_coblin", new OnEntityTargetPlayerCriteria.Conditions(EntityPredicate.Extended.EMPTY, SHEntityTypes.CORN_COBLIN))
+				.criterion("encounter_corn_coblin", OnEntityTargetPlayerCriteria.Conditions.create(EntityPredicate.Extended.EMPTY, EntityPredicate.Extended.ofLegacy(EntityPredicate.Builder.create().type(SHEntityTypes.CORN_COBLIN).build())))
 				.parent(root)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/corn_coblin");
 
 		Advancement encounterChildOfTheCorn = Advancement.Builder.create()
 				.display(makeDisplay(SHObjects.CURSED_CORN_1, "child_of_the_corn"))
-				.criterion("encounter_child_of_the_corn", new OnEntityTargetPlayerCriteria.Conditions(EntityPredicate.Extended.EMPTY, SHEntityTypes.CHILD_OF_THE_CORN))
+				.criterion("encounter_child_of_the_corn", new OnEntityTargetPlayerCriteria.Conditions(EntityPredicate.Extended.EMPTY, EntityPredicate.Extended.ofLegacy(EntityPredicate.Builder.create().type(SHEntityTypes.CHILD_OF_THE_CORN).build())))
 				.parent(root)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/child_of_the_corn");
 
@@ -70,7 +87,7 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 
 		Advancement stickEntityWithSickle = Advancement.Builder.create()
 				.display(makeDisplay(Items.SKELETON_SKULL, "grim_harvest"))
-				.criterion("strike_entity_with_sickle", new HitEntityWithItemCriteria.Conditions(EntityPredicate.Extended.EMPTY, SHObjects.SICKLE.getDefaultStack(), DamageSourcePredicate.EMPTY, EntityPredicate.Extended.EMPTY))
+				.criterion("strike_entity_with_sickle", new HitEntityWithItemCriteria.Conditions(EntityPredicate.Extended.EMPTY, ItemPredicate.Builder.create().items(SHObjects.SICKLE).build(), DamageSourcePredicate.EMPTY, EntityPredicate.Extended.EMPTY))
 				.parent(encounterChildOfTheCorn)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/grim_harvest");
 		Advancement candyCorn = Advancement.Builder.create()
@@ -79,6 +96,19 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 				.parent(encounterCuredCornCrop)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/halloween_classic");
 
+		this.requireFoodItemsEaten(
+				Advancement.Builder.create())
+				.parent(root)
+				.display(makeDisplay(SHObjects.CORN_BREAD, "cornn_flaek"))
+				.rewards(AdvancementRewards.Builder.experience(100))
+				.build(advancementConsumer, "shuckhorror:shuckhorror/cornn_flaek");
 
+	}
+
+	private Advancement.Builder requireFoodItemsEaten(Advancement.Builder builder) {
+		for (Item item : FOOD_ITEMS) {
+			builder.criterion(Registry.ITEM.getId(item).getPath(), ConsumeItemCriterion.Conditions.item(item));
+		}
+		return builder;
 	}
 }

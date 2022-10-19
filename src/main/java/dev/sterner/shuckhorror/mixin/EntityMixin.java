@@ -16,7 +16,7 @@ public abstract class EntityMixin   {
 	@Inject(method = "updateKilledAdvancementCriterion", at = @At(value = "HEAD"))
 	private void injectCriterion(Entity entityKilled, int score, DamageSource damageSource, CallbackInfo ci){
 		if (entityKilled instanceof ServerPlayerEntity player) {
-			SHCriteria.HIT_ENTITY_WITH_ITEM.trigger(player, player.getActiveItem().getItem(), (Entity)(Object)this, damageSource);
+			SHCriteria.HIT_ENTITY_WITH_ITEM.trigger(player, player.getActiveItem(), (Entity)(Object)this, damageSource);
 		}
 	}
 }

@@ -6,14 +6,19 @@ import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
 import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -22,11 +27,13 @@ public class OnEntityTargetPlayerCriteria extends AbstractCriterion<OnEntityTarg
 
 	@Override
 	protected OnEntityTargetPlayerCriteria.Conditions conditionsFromJson(JsonObject obj, EntityPredicate.Extended playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
-		return new OnEntityTargetPlayerCriteria.Conditions(playerPredicate, Registry.ENTITY_TYPE.get(Identifier.tryParse(obj.get("livingEntity").getAsString())));
+		EntityPredicate.Extended entity = EntityPredicate.Extended.getInJson(obj, "entity", predicateDeserializer);
+		return new OnEntityTargetPlayerCriteria.Conditions(playerPredicate, entity);
 	}
 
-	public void trigger(ServerPlayerEntity player, EntityType entityType) {
-		this.trigger(player, c -> entityType == c.getEntity());
+	public void trigger(ServerPlayerEntity player, @Nullable Entity entity) {
+		LootContext lootContext = EntityPredicate.createAdvancementEntityLootContext(player, entity);
+		this.trigger(player, (conditions) -> conditions.test(player, lootContext));
 	}
 
 	@Override
@@ -35,22 +42,30 @@ public class OnEntityTargetPlayerCriteria extends AbstractCriterion<OnEntityTarg
 	}
 
 	public static class Conditions extends AbstractCriterionConditions {
-		private final EntityType livingEntity;
+		private final EntityPredicate.Extended entity;
 
-		public Conditions(EntityPredicate.Extended playerPredicate, EntityType livingEntity) {
+		public Conditions(EntityPredicate.Extended playerPredicate, EntityPredicate.Extended entity) {
 			super(ID, playerPredicate);
-			this.livingEntity = Objects.requireNonNull(livingEntity);
+			this.entity = Objects.requireNonNull(entity);
+		}
+
+		public static OnEntityTargetPlayerCriteria.Conditions create(EntityPredicate.Extended player, EntityPredicate.Extended entity) {
+			return new OnEntityTargetPlayerCriteria.Conditions(player, entity);
+		}
+
+		public boolean test(ServerPlayerEntity player, LootContext entityContext) {
+			return this.entity.test(entityContext);
 		}
 
 		@Override
 		public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
 			JsonObject json = new JsonObject();
-			json.addProperty("livingEntity", livingEntity.toString());
+			json.addProperty("entity", entity.toString());
 			return super.toJson(predicateSerializer);
 		}
 
-		public EntityType getEntity() {
-			return livingEntity;
+		public EntityPredicate.Extended getEntity() {
+			return entity;
 		}
 	}
 }

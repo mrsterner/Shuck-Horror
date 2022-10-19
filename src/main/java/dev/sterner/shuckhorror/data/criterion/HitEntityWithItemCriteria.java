@@ -19,6 +19,7 @@ import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 public class HitEntityWithItemCriteria extends AbstractCriterion<HitEntityWithItemCriteria.Conditions> {
 	public static final Identifier ID = Constants.id("attack_taget_with_item");
@@ -26,17 +27,19 @@ public class HitEntityWithItemCriteria extends AbstractCriterion<HitEntityWithIt
 	@Override
 	protected HitEntityWithItemCriteria.Conditions conditionsFromJson(JsonObject obj, EntityPredicate.Extended playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
 		EntityPredicate.Extended entity = EntityPredicate.Extended.getInJson(obj, "entity", predicateDeserializer);
+		ItemPredicate itemPredicate = ItemPredicate.fromJson(obj.get("item"));
 		return new HitEntityWithItemCriteria.Conditions(
 				playerPredicate,
-				Registry.ITEM.get(Identifier.tryParse(obj.get("item").getAsString())).getDefaultStack(),
+				itemPredicate,
 				DamageSourcePredicate.fromJson(obj.get("killing_blow")),
 				entity
 		);
 	}
 
-	public void trigger(ServerPlayerEntity player, Item item, Entity entity, DamageSource killingDamage) {
+
+	public void trigger(ServerPlayerEntity player, ItemStack stack, @Nullable Entity entity, DamageSource killingDamage) {
 		LootContext lootContext = EntityPredicate.createAdvancementEntityLootContext(player, entity);
-		this.trigger(player, (conditions) -> conditions.test(player, item, lootContext, killingDamage));
+		this.trigger(player, (conditions) -> conditions.test(player, stack, lootContext, killingDamage));
 	}
 
 	@Override
@@ -45,26 +48,31 @@ public class HitEntityWithItemCriteria extends AbstractCriterion<HitEntityWithIt
 	}
 
 	public static class Conditions extends AbstractCriterionConditions {
-		private final ItemStack stack;
+		private final ItemPredicate item;
 		private final DamageSourcePredicate killingBlow;
 		private final EntityPredicate.Extended entity;
 
-		public Conditions(EntityPredicate.Extended player, ItemStack stack, DamageSourcePredicate killingBlow, EntityPredicate.Extended entity) {
+		public Conditions(EntityPredicate.Extended player, ItemPredicate item, DamageSourcePredicate killingBlow, EntityPredicate.Extended entity) {
 			super(HitEntityWithItemCriteria.ID, player);
-			this.stack = stack;
+			this.item = item;
 			this.killingBlow = killingBlow;
 			this.entity = entity;
 		}
 
-		public boolean test(ServerPlayerEntity player, Item item,  LootContext killedEntityContext, DamageSource killingBlow) {
-			return this.killingBlow.test(player, killingBlow) && this.entity.test(killedEntityContext);
+
+		public boolean test(ServerPlayerEntity player, ItemStack stack, LootContext entityContext, DamageSource killingBlow) {
+			if (!this.killingBlow.test(player, killingBlow) && !this.item.test(stack)) {
+				return false;
+			} else {
+				return this.entity.test(entityContext);
+			}
 		}
 
 		public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
 			JsonObject jsonObject = super.toJson(predicateSerializer);
-			jsonObject.addProperty("stack", stack.toString());
-			jsonObject.add("killing_blow", this.killingBlow.toJson());
+			jsonObject.add("item", this.item.toJson());
 			jsonObject.add("entity", this.entity.toJson(predicateSerializer));
+			jsonObject.add("killing_blow", this.killingBlow.toJson());
 			return jsonObject;
 		}
 	}

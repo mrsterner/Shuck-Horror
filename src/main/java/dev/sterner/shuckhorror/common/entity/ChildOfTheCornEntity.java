@@ -25,7 +25,7 @@ public class ChildOfTheCornEntity extends HostileEntity {
 		this.world.getProfiler().pop();
 		ChildOfTheCornBrain.updateActivities(this);
 		if(getTarget() instanceof PlayerEntity player){
-			SHCriteria.ENTITY_TARGET_PLAYER.trigger((ServerPlayerEntity) player, this.getType());
+			SHCriteria.ENTITY_TARGET_PLAYER.trigger((ServerPlayerEntity) player, this);
 
 		}
 		super.mobTick();

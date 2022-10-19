@@ -3,7 +3,11 @@
   "criteria": {
     "strike_entity_with_sickle": {
       "conditions": {
-        "stack": "1 sickle"
+        "item": {
+          "items": [
+            "shuckhorror:sickle"
+          ]
+        }
       },
       "trigger": "shuckhorror:attack_taget_with_item"
     }

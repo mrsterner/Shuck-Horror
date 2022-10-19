@@ -5,11 +5,15 @@ import com.google.gson.JsonSyntaxException;
 import dev.sterner.shuckhorror.common.util.Constants;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
+import net.minecraft.advancement.criterion.PlacedBlockCriterion;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
 import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.predicate.entity.LocationPredicate;
+import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -55,6 +59,10 @@ public class BlockBreakCriteria extends AbstractCriterion<BlockBreakCriteria.Con
 		public Conditions(EntityPredicate.Extended playerPredicate, Block blockTag) {
 			super(ID, playerPredicate);
 			this.block = Objects.requireNonNull(blockTag);
+		}
+
+		public static BlockBreakCriteria.Conditions create(Block block) {
+			return new BlockBreakCriteria.Conditions(EntityPredicate.Extended.EMPTY, block);
 		}
 
 		@Override
