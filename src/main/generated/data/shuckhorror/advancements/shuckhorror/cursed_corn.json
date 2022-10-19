@@ -1,13 +1,16 @@
 {
+  "parent": "shuckhorror:shuckhorror/root",
   "criteria": {
     "destroy_cursed_corn": {
-      "conditions": {},
+      "conditions": {
+        "block": "shuckhorror:cursed_corn_crop"
+      },
       "trigger": "shuckhorror:block_break"
     }
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:shuckhorrortextures/item/corn_cob_1.png",
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "shuckhorror.advancement.cursed_corn.desc"
     },

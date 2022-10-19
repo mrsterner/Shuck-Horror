@@ -15,7 +15,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:shuckhorrortextures/item/corn_cob_1.png",
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "shuckhorror.advancement.root.desc"
     },

@@ -1,0 +1,38 @@
+{
+  "parent": "shuckhorror:shuckhorror/cursed_corn",
+  "criteria": {
+    "inventory_changed": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "shuckhorror:candy_corn"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "shuckhorror.advancement.obtain.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "shuckhorror:candy_corn"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.obtain"
+    }
+  },
+  "requirements": [
+    [
+      "inventory_changed"
+    ]
+  ]
+}

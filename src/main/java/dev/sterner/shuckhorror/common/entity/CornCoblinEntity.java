@@ -1,6 +1,7 @@
 package dev.sterner.shuckhorror.common.entity;
 
 import com.mojang.serialization.Dynamic;
+import dev.sterner.shuckhorror.api.criteria.SHCriteria;
 import dev.sterner.shuckhorror.common.entity.ai.CornCoblinBrain;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.Brain;
@@ -18,6 +19,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Unit;
@@ -112,6 +114,9 @@ public class CornCoblinEntity extends HostileEntity {
 		this.getBrain().tick((ServerWorld)this.world, this);
 		this.world.getProfiler().pop();
 		CornCoblinBrain.updateActivities(this);
+		if(getTarget() instanceof PlayerEntity player){
+			SHCriteria.ENTITY_TARGET_PLAYER.trigger((ServerPlayerEntity) player, this.getType());
+		}
 		super.mobTick();
 	}
 
