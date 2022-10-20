@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.FlintAndSteelItem;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -45,24 +46,22 @@ public class CursedCornCropBlock extends CornCropBlock{
 		return true;
 	}
 
+	public void genParticle(ParticleEffect particleEffect, World world, BlockPos pos, Random random){
+		for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+			double d = (double)pos.getX() + random.nextDouble();
+			double e = (double)pos.getY() - 1.0 + random.nextDouble() * 3;
+			double f = (double)pos.getZ() + random.nextDouble();
+			world.addParticle(particleEffect, d, e, f, 0.0, 0.0, 0.0);
+		}
+	}
 
 	@Override
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
 		super.randomDisplayTick(state, world, pos, random);
 		if(state.get(LIT)){
 			if (random.nextInt(5) == 0) {
-				for(int i = 0; i < random.nextInt(1) + 1; ++i) {
-					double d = (double)pos.getX() + random.nextDouble();
-					double e = (double)pos.getY() - 1.0 + random.nextDouble() * 3;
-					double f = (double)pos.getZ() + random.nextDouble();
-					world.addParticle(ParticleTypes.SOUL, d, e, f, 0.0, 0.0, 0.0);
-				}
-				for(int i = 0; i < random.nextInt(1) + 1; ++i) {
-					double g = (double)pos.getX() + random.nextDouble();
-					double h = (double)pos.getY() - 1.0 + random.nextDouble() * 3;
-					double k = (double)pos.getZ() + random.nextDouble();
-					world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, g, h, k, 0.0, 0.0, 0.0);
-				}
+				genParticle(ParticleTypes.SOUL, world, pos, random);
+				genParticle(ParticleTypes.SOUL_FIRE_FLAME, world, pos, random);
 			}
 		}
 	}
