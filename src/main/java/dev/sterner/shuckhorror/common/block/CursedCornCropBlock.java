@@ -1,15 +1,16 @@
 package dev.sterner.shuckhorror.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -20,6 +21,7 @@ public class CursedCornCropBlock extends CornCropBlock{
 
 	public CursedCornCropBlock(Settings settings) {
 		super(settings);
+		this.setDefaultState(this.getDefaultState().with(this.getAgeProperty(), 0).with(HALF, DoubleBlockHalf.LOWER).with(AGE, 0).with(LIT, false));
 	}
 
 	@Override
@@ -44,22 +46,22 @@ public class CursedCornCropBlock extends CornCropBlock{
 	}
 
 
-
 	@Override
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
 		super.randomDisplayTick(state, world, pos, random);
 		if(state.get(LIT)){
 			if (random.nextInt(5) == 0) {
 				for(int i = 0; i < random.nextInt(1) + 1; ++i) {
-					world.addParticle(
-							ParticleTypes.SOUL_FIRE_FLAME,
-							(double)pos.getX() + 0.5,
-							(double)pos.getY() + 0.5,
-							(double)pos.getZ() + 0.5,
-							(double)(random.nextFloat() / 2.0F),
-							5.0E-5,
-							(double)(random.nextFloat() / 2.0F)
-					);
+					double d = (double)pos.getX() + random.nextDouble();
+					double e = (double)pos.getY() - 1.0 + random.nextDouble() * 3;
+					double f = (double)pos.getZ() + random.nextDouble();
+					world.addParticle(ParticleTypes.SOUL, d, e, f, 0.0, 0.0, 0.0);
+				}
+				for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+					double g = (double)pos.getX() + random.nextDouble();
+					double h = (double)pos.getY() - 1.0 + random.nextDouble() * 3;
+					double k = (double)pos.getZ() + random.nextDouble();
+					world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, g, h, k, 0.0, 0.0, 0.0);
 				}
 			}
 		}
