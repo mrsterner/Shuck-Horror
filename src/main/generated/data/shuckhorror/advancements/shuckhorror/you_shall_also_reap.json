@@ -25,7 +25,8 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "shuckhorror:sickle"
+      "item": "shuckhorror:sickle",
+      "nbt": "{Damage:0}"
     },
     "show_toast": true,
     "title": {
