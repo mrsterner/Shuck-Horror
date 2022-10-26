@@ -1,10 +1,13 @@
 package dev.sterner.shuckhorror.common.entity.ai.goal;
 
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import dev.sterner.shuckhorror.common.util.SHUtils;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.WitchEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -52,6 +55,7 @@ public class CurseCornGoal extends Goal {
 		super.tick();
 		if (this.world.getBlockState(targetPos).isOf(SHObjects.CORN_CROP)) {
 			if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+
 				this.world.syncWorldEvent(2001, targetPos, Block.getRawIdFromState(SHObjects.CORN_CROP.getDefaultState()));
 				SHUtils.transferBlockState(world, targetPos, SHObjects.CURSED_CORN_CROP.getDefaultState());
 
@@ -60,8 +64,8 @@ public class CurseCornGoal extends Goal {
 				}else if(world.getBlockState(targetPos.down()).isOf(SHObjects.CORN_CROP)){
 					SHUtils.transferBlockState(world, targetPos.down(), SHObjects.CURSED_CORN_CROP.getDefaultState());
 				}
+				PlayerLookup.tracking(mob).forEach(tracking -> SpawnSoulParticlesPacket.send(tracking, targetPos));
 			}
-			this.mob.onEatingGrass();
 		}
 	}
 

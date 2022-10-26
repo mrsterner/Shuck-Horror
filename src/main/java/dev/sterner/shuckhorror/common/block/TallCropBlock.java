@@ -1,6 +1,7 @@
 package dev.sterner.shuckhorror.common.block;
 
 import dev.sterner.shuckhorror.common.registry.SHObjects;
+import dev.sterner.shuckhorror.common.util.Constants;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
@@ -67,7 +68,7 @@ public class TallCropBlock extends CropBlock {
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		if (state.get(HALF) == DoubleBlockHalf.LOWER) {
 			BlockState upperBlockState = world.getBlockState(pos.up());
-			if (upperBlockState.getBlock() == this && this.getAge(upperBlockState) < UPPER_START_AGE){
+			if (upperBlockState.isIn(Constants.Tags.CORN) && this.getAge(upperBlockState) < UPPER_START_AGE){
 				return false;
 			}
 			return super.canPlaceAt(state, world, pos);
@@ -76,10 +77,10 @@ public class TallCropBlock extends CropBlock {
 				return false;
 			}
 			BlockState blockstate = world.getBlockState(pos.down());
-			if (state.getBlock() != this){
+			if (!state.isIn(Constants.Tags.CORN)){
 				return super.canPlaceAt(state, world, pos);
 			}
-			return blockstate.isOf(this) && blockstate.get(HALF) == DoubleBlockHalf.LOWER && this.getAge(state) == this.getAge(blockstate);
+			return state.isIn(Constants.Tags.CORN) && blockstate.get(HALF) == DoubleBlockHalf.LOWER && this.getAge(state) == this.getAge(blockstate);
 		}
 	}
 
@@ -87,7 +88,7 @@ public class TallCropBlock extends CropBlock {
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		DoubleBlockHalf doubleBlockHalf = state.get(HALF);
-		if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!neighborState.isOf(this) || neighborState.get(HALF) == doubleBlockHalf)) {
+		if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!neighborState.isIn(Constants.Tags.CORN) || neighborState.get(HALF) == doubleBlockHalf)) {
 			return Blocks.AIR.getDefaultState();
 		} else {
 			return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -96,13 +97,17 @@ public class TallCropBlock extends CropBlock {
 
 	@Override
 	public void applyGrowth(World world, BlockPos pos, BlockState state) {
-		int newAgeTriedToDestroyTheMetal = this.getAge(state) + getGrowthAmount(world);
-		newAgeTriedToDestroyTheMetal = Math.min(newAgeTriedToDestroyTheMetal, this.getMaxAge());
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
 			pos = pos.down();
 		}
+
+		int newAgeTriedToDestroyTheMetal = this.getAge(state) + getGrowthAmount(world);
+		newAgeTriedToDestroyTheMetal = Math.min(newAgeTriedToDestroyTheMetal, this.getMaxAge());
+
 		if (newAgeTriedToDestroyTheMetal >= UPPER_START_AGE) {
-			if (!this.canGrow(world, world.getRandom(), pos, state)) return;
+			if (!this.canGrow(world, world.getRandom(), pos, state)){
+				return;
+			}
 			world.setBlockState(pos.up(), withAge(newAgeTriedToDestroyTheMetal).with(HALF, DoubleBlockHalf.UPPER), 3);
 		}
 		world.setBlockState(pos, withAge(newAgeTriedToDestroyTheMetal), 2);
@@ -114,9 +119,15 @@ public class TallCropBlock extends CropBlock {
 		return blockState.getBlock() instanceof TallCropBlock || blockState.getMaterial().isReplaceable();
 	}
 
+	public boolean canGrowUp(BlockView world, BlockPos downPos) {
+		BlockState state = world.getBlockState(downPos.up());
+		return state.getBlock() instanceof TallCropBlock || state.getMaterial().isReplaceable();
+	}
+
 	@Override
 	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-		return state.get(HALF) == DoubleBlockHalf.LOWER && (state.get(AGE) != getMaxAge() && this.getAge(state) < UPPER_START_AGE - 1);
+		return state.get(HALF) == DoubleBlockHalf.LOWER && (!this.isMature(state) && (this.canGrowUp(world, pos) || this.getAge(state) < UPPER_START_AGE - 1));
+
 	}
 
 	@Override

@@ -1,10 +1,12 @@
 package dev.sterner.shuckhorror;
 
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.client.renderer.ScytheItemRenderer;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.render.RenderLayer;
@@ -17,7 +19,7 @@ public class ShuckHorrorClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),SHObjects.CORN_CROP, SHObjects.CURSED_CORN_CROP, SHObjects.CANDY_CORN_CROP, SHObjects.WILD_MAIZE);
-
+		ClientPlayNetworking.registerGlobalReceiver(SpawnSoulParticlesPacket.ID, SpawnSoulParticlesPacket::handle);
 
 				Identifier bigItemId = Registry.ITEM.getId(SHObjects.SCYTHE);
 		ScytheItemRenderer scytheItemRenderer = new ScytheItemRenderer(bigItemId);

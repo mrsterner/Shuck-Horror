@@ -1,5 +1,7 @@
 package dev.sterner.shuckhorror.common.util;
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.common.block.CornCropBlock;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +13,8 @@ public class SHUtils {
 		int age = world.getBlockState(pos).get(CornCropBlock.AGE);
 		DoubleBlockHalf doubleBlockHalf = world.getBlockState(pos).get(CornCropBlock.HALF);
 		world.setBlockState(pos, newState.with(CornCropBlock.AGE, age).with(CornCropBlock.HALF, doubleBlockHalf), 2);
+
+
 	}
 
 

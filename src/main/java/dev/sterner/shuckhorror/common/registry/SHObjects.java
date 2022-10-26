@@ -2,6 +2,7 @@ package dev.sterner.shuckhorror.common.registry;
 
 import dev.sterner.shuckhorror.common.block.*;
 import dev.sterner.shuckhorror.common.item.CornItem;
+import dev.sterner.shuckhorror.common.item.SHDebugStick;
 import dev.sterner.shuckhorror.common.item.ScytheItem;
 import dev.sterner.shuckhorror.common.item.SickleItem;
 import dev.sterner.shuckhorror.common.util.Constants;
@@ -30,6 +31,7 @@ public class SHObjects {
 	public static final Block CORN_BREAD_BLOCK = register("corn_bread", new CornBreadBlock(CORN), genSettings(), false);
 
 	//Items
+	public static final Item DEBUG = register("debug", new SHDebugStick(genSettings()));
 	public static final Item CORN_BREAD = register("corn_bread", new AliasedBlockItem(CORN_BREAD_BLOCK, genSettings()));
 
 	public static final Item CORN_COB_1 = register("corn_1", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 1, false));
