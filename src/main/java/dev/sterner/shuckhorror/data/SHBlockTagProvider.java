@@ -18,5 +18,6 @@ public class SHBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 		getOrCreateTagBuilder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).add(SHObjects.CURSED_CORN_CROP);
 		getOrCreateTagBuilder(BlockTags.BEE_GROWABLES).add(SHObjects.CURSED_CORN_CROP);
 		getOrCreateTagBuilder(Constants.Tags.CORN).add(SHObjects.CURSED_CORN_CROP).add(SHObjects.CANDY_CORN_CROP).add(SHObjects.CORN_CROP);
+		getOrCreateTagBuilder(BlockTags.FLOWERS).add(SHObjects.CURSED_CORN_CROP);
 	}
 }

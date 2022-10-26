@@ -3,3 +3,4 @@ accessible method net/minecraft/block/TallPlantBlock onBreakInCreative (Lnet/min
 accessible class net/minecraft/entity/ai/brain/sensor/SensorType
 accessible class net/minecraft/entity/passive/BeeEntity$GrowCropsGoal
 accessible class net/minecraft/entity/passive/BeeEntity$PollinateGoal
+accessible  method  net/minecraft/entity/passive/BeeEntity  addCropCounter  ()V

@@ -10,12 +10,10 @@ import net.minecraft.world.World;
 public class SHUtils {
 
 	public static void transferBlockState(World world, BlockPos pos, BlockState newState){
-		int age = world.getBlockState(pos).get(CornCropBlock.AGE);
-		DoubleBlockHalf doubleBlockHalf = world.getBlockState(pos).get(CornCropBlock.HALF);
-		world.setBlockState(pos, newState.with(CornCropBlock.AGE, age).with(CornCropBlock.HALF, doubleBlockHalf), 2);
-
-
+		if(world.getBlockState(pos).isIn(Constants.Tags.CORN)){
+			int age = world.getBlockState(pos).get(CornCropBlock.AGE);
+			DoubleBlockHalf doubleBlockHalf = world.getBlockState(pos).get(CornCropBlock.HALF);
+			world.setBlockState(pos, newState.with(CornCropBlock.AGE, age).with(CornCropBlock.HALF, doubleBlockHalf), 2);
+		}
 	}
-
-
 }
