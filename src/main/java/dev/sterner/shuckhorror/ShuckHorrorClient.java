@@ -16,7 +16,7 @@ import net.minecraft.util.registry.Registry;
 public class ShuckHorrorClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),SHObjects.CORN_CROP, SHObjects.CURSED_CORN_CROP, SHObjects.CANDY_CORN_CROP);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),SHObjects.CORN_CROP, SHObjects.CURSED_CORN_CROP, SHObjects.CANDY_CORN_CROP, SHObjects.WILD_MAIZE);
 
 
 				Identifier bigItemId = Registry.ITEM.getId(SHObjects.SCYTHE);

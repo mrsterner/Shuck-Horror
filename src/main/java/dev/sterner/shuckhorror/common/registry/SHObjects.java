@@ -22,7 +22,7 @@ public class SHObjects {
 	public static final AbstractBlock.Settings CORN = AbstractBlock.Settings.of(Material.REPLACEABLE_PLANT).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offsetType(AbstractBlock.OffsetType.XZ);
 
 	//Blocks
-	public static final Block WILD_MAIZE = register("wild_maze", new PlantBlock(CORN), genSettings(), false);
+	public static final Block WILD_MAIZE = register("wild_maize", new PlantBlock(CORN), genSettings(), false);
 	public static final Block CORN_CROP = register("corn_crop", new CornCropBlock(CORN), genSettings(), false);
 	public static final Block CURSED_CORN_CROP = register("cursed_corn_crop", new CursedCornCropBlock(CORN), genSettings(), false);
 	public static final Block CANDY_CORN_CROP = register("candy_corn_crop", new CornCropBlock(CORN), genSettings(), false);
