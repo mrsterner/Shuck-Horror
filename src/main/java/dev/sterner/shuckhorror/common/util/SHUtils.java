@@ -1,8 +1,6 @@
 package dev.sterner.shuckhorror.common.util;
-import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.common.block.CornCropBlock;
 import dev.sterner.shuckhorror.common.block.TallCropBlock;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.DoubleBlockHalf;

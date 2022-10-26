@@ -12,7 +12,6 @@ import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.predicate.StatePredicate;
-import net.minecraft.world.SpawnHelper;
 
 public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 	protected SHBlockLootTableProvider(FabricDataGenerator dataGenerator) {

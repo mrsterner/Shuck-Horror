@@ -3,7 +3,6 @@ package dev.sterner.shuckhorror.common.item;
 import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import dev.sterner.shuckhorror.common.util.SHUtils;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.network.ServerPlayerEntity;
