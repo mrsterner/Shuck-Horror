@@ -6,4 +6,6 @@ public class ScytheItem extends Item {
 	public ScytheItem(Settings settings) {
 		super(settings);
 	}
+
+
 }

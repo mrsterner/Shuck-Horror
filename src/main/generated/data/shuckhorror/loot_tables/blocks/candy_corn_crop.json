@@ -8,9 +8,19 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "shuckhorror:corn_kernels"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "shuckhorror:corn_crop",
+          "block": "shuckhorror:candy_corn_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "4"
@@ -29,7 +39,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "shuckhorror:corn_crop",
+          "block": "shuckhorror:candy_corn_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "5"

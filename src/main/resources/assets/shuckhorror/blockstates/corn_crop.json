@@ -10,13 +10,13 @@
       "model": "shuckhorror:block/corn_crop_stage2"
     },
     "age=3,half=lower": {
-      "model": "shuckhorror:block/corn_crop_stage3"
+      "model": "shuckhorror:block/corn_crop_stage5_lower"
     },
     "age=4,half=lower": {
-      "model": "shuckhorror:block/corn_crop_stage4"
+      "model": "shuckhorror:block/corn_crop_stage5_lower"
     },
     "age=5,half=lower": {
-      "model": "shuckhorror:block/corn_crop_stage5"
+      "model": "shuckhorror:block/corn_crop_stage5_lower"
     },
     "age=0,half=upper": {
       "model": "shuckhorror:block/corn_top"
@@ -28,13 +28,13 @@
       "model": "shuckhorror:block/corn_top"
     },
     "age=3,half=upper": {
-      "model": "shuckhorror:block/corn_top"
+      "model": "shuckhorror:block/corn_crop_stage3"
     },
     "age=4,half=upper": {
-      "model": "shuckhorror:block/corn_top"
+      "model": "shuckhorror:block/corn_crop_stage4"
     },
     "age=5,half=upper": {
-      "model": "shuckhorror:block/corn_top"
+      "model": "shuckhorror:block/corn_crop_stage5"
     }
   }
 }

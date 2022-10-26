@@ -12,6 +12,7 @@ import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.predicate.StatePredicate;
+import net.minecraft.world.SpawnHelper;
 
 public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 	protected SHBlockLootTableProvider(FabricDataGenerator dataGenerator) {
@@ -25,6 +26,9 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 
 		LootCondition.Builder cursedCornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CURSED_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4));
 		LootCondition.Builder cursedCornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CURSED_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5));
+
+		LootCondition.Builder candyCornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CANDY_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4));
+		LootCondition.Builder candyCornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CANDY_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5));
 
 		this.addDrop(SHObjects.WILD_MAIZE, SHObjects.CORN_KERNELS);
 
@@ -47,10 +51,12 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 						SHObjects.CANDY_CORN_CROP,
 						LootTable.builder()
 								.pool(LootPool.builder()
-										.conditionally(cornBuilder4)
+										.with(ItemEntry.builder(SHObjects.CORN_KERNELS)))
+								.pool(LootPool.builder()
+										.conditionally(candyCornBuilder4)
 										.with(ItemEntry.builder(SHObjects.CANDY_CORN)))
 								.pool(LootPool.builder()
-										.conditionally(cornBuilder5)
+										.conditionally(candyCornBuilder5)
 										.with(ItemEntry.builder(SHObjects.CANDY_CORN)
 												.apply(ApplyBonusLootFunction.binomialWithBonusCount(Enchantments.FORTUNE, 0.5714286F, 2))))
 				)

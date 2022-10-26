@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -15,6 +16,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 public class CursedCornCropBlock extends CornCropBlock{
 	public static final BooleanProperty LIT = Properties.LIT;
@@ -52,6 +54,25 @@ public class CursedCornCropBlock extends CornCropBlock{
 			double e = (double)pos.getY() - 1.0 + random.nextDouble() * 3;
 			double f = (double)pos.getZ() + random.nextDouble();
 			world.addParticle(particleEffect, d, e, f, 0.0, 0.0, 0.0);
+		}
+	}
+
+	@Override
+	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		super.randomTick(state, world, pos, random);
+		if(state.get(LIT)){
+			if (random.nextInt(50) == 0) {
+				DoubleBlockHalf doubleBlockHalf = state.get(HALF);
+				if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
+					BlockPos blockPos = pos.down();
+					BlockState blockState = world.getBlockState(blockPos);
+					if (blockState.isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
+						BlockState blockState2 = blockState.contains(Properties.WATERLOGGED) && (Boolean)blockState.get(Properties.WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
+						world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
+					}
+				}
+			}
+
 		}
 	}
 

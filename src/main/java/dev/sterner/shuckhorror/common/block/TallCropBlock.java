@@ -1,29 +1,40 @@
 package dev.sterner.shuckhorror.common.block;
 
+import dev.sterner.shuckhorror.ShuckHorror;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import dev.sterner.shuckhorror.common.util.Constants;
+import dev.sterner.shuckhorror.common.util.SHUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.event.GameEvent;
 
 public class TallCropBlock extends CropBlock {
 	public static final IntProperty AGE;
 	public static final int MAX_AGE = 5;
-	public static final int UPPER_START_AGE = 4;
+	public static final int UPPER_START_AGE = 3;
 	public static final EnumProperty<DoubleBlockHalf> HALF;
 	private static final VoxelShape FULL_BOTTOM;
 	private static final VoxelShape[] LOWER_SHAPES;
@@ -49,6 +60,18 @@ public class TallCropBlock extends CropBlock {
 				}
 			}
 		}
+	}
+
+
+
+
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if(SHUtils.harvestCorn(player, world, state, pos)){
+			return ActionResult.CONSUME;
+		}
+		return super.onUse(state, world, pos, player, hand, hit);
 	}
 
 	@Override
@@ -93,6 +116,11 @@ public class TallCropBlock extends CropBlock {
 		} else {
 			return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
 		}
+	}
+
+	@Override
+	protected int getGrowthAmount(World world) {
+		return MathHelper.nextInt(world.random, 1, 3);
 	}
 
 	@Override
