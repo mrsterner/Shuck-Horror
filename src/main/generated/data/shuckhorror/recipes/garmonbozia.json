@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "minecraft:bowl"
+    },
+    "c": {
+      "item": "shuckhorror:cursed_corn_1"
+    },
+    "o": {
+      "item": "shuckhorror:corn_1"
+    },
+    "p": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "pattern": [
+    "ccc",
+    "coc",
+    "pbp"
+  ],
+  "result": {
+    "item": "shuckhorror:garmonbozia"
+  }
+}

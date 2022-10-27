@@ -1,5 +1,6 @@
 package dev.sterner.shuckhorror;
 
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.client.renderer.ScytheItemRenderer;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -12,12 +13,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
+import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 import org.quiltmc.qsl.resource.loader.api.ResourceLoader;
 
 public class ShuckHorrorClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient(ModContainer mod) {
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),SHObjects.CORN_CROP, SHObjects.CURSED_CORN_CROP, SHObjects.CANDY_CORN_CROP);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),SHObjects.CORN_CROP, SHObjects.CURSED_CORN_CROP, SHObjects.CANDY_CORN_CROP, SHObjects.WILD_MAIZE);
+		ClientPlayNetworking.registerGlobalReceiver(SpawnSoulParticlesPacket.ID, SpawnSoulParticlesPacket::handle);
 
 
 		Identifier bigItemId = Registry.ITEM.getId(SHObjects.SCYTHE);

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "shuckhorror:cursed_corn_kernels"
+    },
+    {
+      "item": "shuckhorror:cursed_corn_kernels"
+    },
+    {
+      "item": "shuckhorror:cursed_corn_kernels"
+    }
+  ],
+  "result": {
+    "item": "shuckhorror:cursed_corn_1"
+  }
+}

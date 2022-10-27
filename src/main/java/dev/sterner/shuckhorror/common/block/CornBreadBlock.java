@@ -26,8 +26,6 @@ public class CornBreadBlock extends Block {
 		this.setDefaultState(this.getDefaultState().with(CORN_BITES, 0));
 	}
 
-
-
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack itemStack = player.getStackInHand(hand);
@@ -83,7 +81,7 @@ public class CornBreadBlock extends Block {
 
 
 	static {
-		CORN_BITES =  IntProperty.of("corn_bites", 0, 3);
+		CORN_BITES = IntProperty.of("corn_bites", 0, 3);
 		DEFAULT_COMPARATOR_OUTPUT = getComparatorOutput(0);
 		BITES_TO_SHAPE = new VoxelShape[]{
 				Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),

@@ -1,0 +1,36 @@
+{
+  "parent": "shuckhorror:shuckhorror/you_shall_also_reap",
+  "criteria": {
+    "strike_entity_with_sickle": {
+      "conditions": {
+        "item": {
+          "items": [
+            "shuckhorror:sickle"
+          ]
+        }
+      },
+      "trigger": "shuckhorror:attack_taget_with_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "shuckhorror.advancement.grim_harvest.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.grim_harvest"
+    }
+  },
+  "requirements": [
+    [
+      "strike_entity_with_sickle"
+    ]
+  ]
+}

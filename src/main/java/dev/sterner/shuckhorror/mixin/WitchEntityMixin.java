@@ -1,5 +1,6 @@
 package dev.sterner.shuckhorror.mixin;
 
+
 import dev.sterner.shuckhorror.common.entity.ai.goal.CurseCornGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.WitchEntity;

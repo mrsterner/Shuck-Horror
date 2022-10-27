@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "d": {
+      "item": "minecraft:dark_oak_sapling"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "s": {
+      "item": "shuckhorror:sickle"
+    }
+  },
+  "pattern": [
+    "ns",
+    "d ",
+    "d "
+  ],
+  "result": {
+    "item": "shuckhorror:scythe"
+  }
+}

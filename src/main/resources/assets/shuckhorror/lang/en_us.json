@@ -1,0 +1,55 @@
+{
+  "itemGroup.shuckhorror.shuckhorror" : "Shuck Horror",
+
+  "item.shuckhorror.corn_1" : "Corn Cob",
+  "item.shuckhorror.corn_2" : "Corn Cob",
+  "item.shuckhorror.corn_3" : "Corn Cob",
+
+  "item.shuckhorror.cursed_corn_1" : "Cursed Corn Cob",
+  "item.shuckhorror.cursed_corn_2" : "Cursed Corn Cob",
+  "item.shuckhorror.cursed_corn_3" : "Cursed Corn Cob",
+
+  "item.shuckhorror.roasted_corn_1" : "Roasted Corn Cob",
+  "item.shuckhorror.roasted_corn_2" : "Roasted Corn Cob",
+  "item.shuckhorror.roasted_corn_3" : "Roasted Corn Cob",
+
+  "item.shuckhorror.corn_bread" : "Corn Bread",
+  "item.shuckhorror.corn_kernels" : "Corn Kernels",
+  "item.shuckhorror.cursed_corn_kernels" : "Cursed Corn Kernels",
+  "item.shuckhorror.popcorn" : "Popcorn",
+  "item.shuckhorror.candy_corn" : "Candy Corn",
+  "item.shuckhorror.garmonbozia" : "Garmonbozia",
+  "item.shuckhorror.sickle" : "Sickle",
+  "item.shuckhorror.scythe" : "Scythe",
+
+  "block.shuckhorror.wild_maize": "Wild Maize",
+  "block.shuckhorror.corn_crop": "Corn Crop",
+  "block.shuckhorror.cursed_corn_crop": "Cursed Corn Crop",
+  "block.shuckhorror.candy_corn_crop": "Candy Corn Crop",
+  "block.shuckhorror.corn_bread_block": "Corn Bread",
+
+
+  "shuckhorror.advancement.root" : "A Corny Mod",
+  "shuckhorror.advancement.root.desc" : "Find and break Wild Maize in Plains or Jungle clearings, then plant the Kernels in Farmland.",
+
+  "shuckhorror.advancement.cursed_corn" : "What Stalks Behind the Rows",
+  "shuckhorror.advancement.cursed_corn.desc" : "Encounter Cursed Corn, created by something dying on or near Corn Stalks, or from a Witch cursing it.",
+
+  "shuckhorror.advancement.corn_coblin" : "Clash of the Corn Cuties",
+  "shuckhorror.advancement.corn_coblin.desc" : "Encounter Corn Coblins!",
+
+  "shuckhorror.advancement.child_of_the_corn" : "What you sow...",
+  "shuckhorror.advancement.child_of_the_corn.desc" : "Encounter a Child of the Corn",
+
+  "shuckhorror.advancement.you_shall_also_reap" : "... you shall also reap",
+  "shuckhorror.advancement.you_shall_also_reap.desc" : "Best a Child of the Corn, and claim its Sickle!",
+
+  "shuckhorror.advancement.obtain" : "Halloween Classic!",
+  "shuckhorror.advancement.obtain.desc" : "Obtain Candy Corn! Created by a Bee pollinating Cursed Corn. Contains real Halloween Spirits!",
+
+  "shuckhorror.advancement.cornn_flaek" : "Cornn Flaek",
+  "shuckhorror.advancement.cornn_flaek.desc" : "Chow down on a Corn on the Cob, Roasted Corn on the Cob, and Corn Bread.",
+
+  "shuckhorror.advancement.grim_harvest" : "Grim Harvest",
+  "shuckhorror.advancement.grim_harvest.desc" : "Slay a mob or player with a Sickle, and take their head!"
+}

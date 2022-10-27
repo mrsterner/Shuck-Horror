@@ -1,21 +1,21 @@
-// 1.19.2	2022-10-18T10:19:21.655592762	Models
+// 1.19.2	2022-10-27T21:09:55.267219044	Models
 20c8f47b356930178db21b94f257105c9402e7bc assets/shuckhorror/models/item/popcorn.json
-dc924e5e689b7001ad6dcb64e66d06b8f9c2e1e7 assets/shuckhorror/models/item/wild_maze.json
 8c9e9451baed7dc9bed31a571a582cef21185e5e assets/shuckhorror/models/item/roasted_corn_2.json
 e5753928eb2222362942fba09f62216acd9dfba2 assets/shuckhorror/models/item/cursed_corn_2.json
-8857f2741cb4222e9e638e13ef0b4395dd5a9b12 assets/shuckhorror/blockstates/wild_maze.json
 98d77c9b92fe1c0fca9a24a96e5ad83d30b15962 assets/shuckhorror/models/item/sickle.json
 b15f8a4cefce128832c1b767a088cfe7f83dff41 assets/shuckhorror/models/item/roasted_corn_3.json
 aba280fe3ddbc6f1b8fc1198bf78d26d8eae70e4 assets/shuckhorror/models/item/corn_bread.json
+7988c61af3a7ddcf8927740437243832e9b49d32 assets/shuckhorror/blockstates/wild_maize.json
 b389359ed32d66f812b9b7ac8db56066c0736860 assets/shuckhorror/models/item/cursed_corn_kernels.json
 aeac594d2085649f5bc9dc5f09617cac05f03a5f assets/shuckhorror/models/item/corn_1.json
 e2d09028a6ddb0bc5c9f964f5278af4cf83bc663 assets/shuckhorror/blockstates/corn_bread.json
 a8916e90fa6fc6c8fdd4fbf3d5ae6b3bea5e06cc assets/shuckhorror/models/item/garmonbozia.json
 74c97fe31872a8f654e42be77937661d12d32bee assets/shuckhorror/models/item/candy_corn.json
-48af8ce22bdb3a08f3d5e90e8b7c65ada6b3fd8f assets/shuckhorror/models/block/wild_maze.json
 8317db37872b1691b5c1e5570e9caead4e6c7497 assets/shuckhorror/models/item/roasted_corn_1.json
 a1ed002aa104e84ff56267b303cd14e6169f07d6 assets/shuckhorror/models/item/cursed_corn_1.json
 6b49cc7989bd45a47c231fd239b13efa31bef7a5 assets/shuckhorror/models/item/corn_3.json
+744fcbaebd95fae62e2d4cbe57af5eecf8d92c98 assets/shuckhorror/models/item/debug.json
 a73614b99cfc03c4db1165625065a4f8f7db8447 assets/shuckhorror/models/item/corn_2.json
 c389d8d853083772a144a5e7f1833888ad8beb15 assets/shuckhorror/models/item/corn_kernels.json
 d30828e452c84f286d3a94cce886b3fe53b120fc assets/shuckhorror/models/item/cursed_corn_3.json
+89d9d23ba2aa3bef02fe3e2be1162188d41de9c6 assets/shuckhorror/models/block/wild_maize.json

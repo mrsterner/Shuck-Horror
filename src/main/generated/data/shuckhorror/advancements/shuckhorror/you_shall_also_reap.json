@@ -1,0 +1,41 @@
+{
+  "parent": "shuckhorror:shuckhorror/child_of_the_corn",
+  "criteria": {
+    "on_killed": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "shuckhorror:child_of_the_corn"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "shuckhorror.advancement.you_shall_also_reap.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "shuckhorror:sickle",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "shuckhorror.advancement.you_shall_also_reap"
+    }
+  },
+  "requirements": [
+    [
+      "on_killed"
+    ]
+  ]
+}

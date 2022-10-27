@@ -1,8 +1,9 @@
 package dev.sterner.shuckhorror.common.block;
 
 import dev.sterner.shuckhorror.common.registry.SHObjects;
+import dev.sterner.shuckhorror.common.util.Constants;
+import dev.sterner.shuckhorror.common.util.SHUtils;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
@@ -11,8 +12,12 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -23,7 +28,7 @@ import net.minecraft.world.WorldView;
 public class TallCropBlock extends CropBlock {
 	public static final IntProperty AGE;
 	public static final int MAX_AGE = 5;
-	public static final int UPPER_START_AGE = 4;
+	public static final int UPPER_START_AGE = 3;
 	public static final EnumProperty<DoubleBlockHalf> HALF;
 	private static final VoxelShape FULL_BOTTOM;
 	private static final VoxelShape[] LOWER_SHAPES;
@@ -51,6 +56,18 @@ public class TallCropBlock extends CropBlock {
 		}
 	}
 
+
+
+
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if(SHUtils.harvestCorn(player, world, state, pos)){
+			return ActionResult.CONSUME;
+		}
+		return super.onUse(state, world, pos, player, hand, hit);
+	}
+
 	@Override
 	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!world.isClient) {
@@ -68,7 +85,7 @@ public class TallCropBlock extends CropBlock {
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		if (state.get(HALF) == DoubleBlockHalf.LOWER) {
 			BlockState upperBlockState = world.getBlockState(pos.up());
-			if (upperBlockState.getBlock() == this && this.getAge(upperBlockState) < UPPER_START_AGE){
+			if (upperBlockState.isIn(Constants.Tags.CORN) && this.getAge(upperBlockState) < UPPER_START_AGE){
 				return false;
 			}
 			return super.canPlaceAt(state, world, pos);
@@ -77,10 +94,10 @@ public class TallCropBlock extends CropBlock {
 				return false;
 			}
 			BlockState blockstate = world.getBlockState(pos.down());
-			if (state.getBlock() != this){
+			if (!state.isIn(Constants.Tags.CORN)){
 				return super.canPlaceAt(state, world, pos);
 			}
-			return blockstate.isOf(this) && blockstate.get(HALF) == DoubleBlockHalf.LOWER && this.getAge(state) == this.getAge(blockstate);
+			return state.isIn(Constants.Tags.CORN) && blockstate.get(HALF) == DoubleBlockHalf.LOWER && this.getAge(state) == this.getAge(blockstate);
 		}
 	}
 
@@ -88,7 +105,7 @@ public class TallCropBlock extends CropBlock {
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		DoubleBlockHalf doubleBlockHalf = state.get(HALF);
-		if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!neighborState.isOf(this) || neighborState.get(HALF) == doubleBlockHalf)) {
+		if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!neighborState.isIn(Constants.Tags.CORN) || neighborState.get(HALF) == doubleBlockHalf)) {
 			return Blocks.AIR.getDefaultState();
 		} else {
 			return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -96,14 +113,23 @@ public class TallCropBlock extends CropBlock {
 	}
 
 	@Override
+	protected int getGrowthAmount(World world) {
+		return MathHelper.nextInt(world.random, 1, 3);
+	}
+
+	@Override
 	public void applyGrowth(World world, BlockPos pos, BlockState state) {
-		int newAgeTriedToDestroyTheMetal = this.getAge(state) + getGrowthAmount(world);
-		newAgeTriedToDestroyTheMetal = Math.min(newAgeTriedToDestroyTheMetal, this.getMaxAge());
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
 			pos = pos.down();
 		}
+
+		int newAgeTriedToDestroyTheMetal = this.getAge(state) + getGrowthAmount(world);
+		newAgeTriedToDestroyTheMetal = Math.min(newAgeTriedToDestroyTheMetal, this.getMaxAge());
+
 		if (newAgeTriedToDestroyTheMetal >= UPPER_START_AGE) {
-			if (!this.canGrow(world, world.getRandom(), pos, state)) return;
+			if (!this.canGrow(world, world.getRandom(), pos, state)){
+				return;
+			}
 			world.setBlockState(pos.up(), withAge(newAgeTriedToDestroyTheMetal).with(HALF, DoubleBlockHalf.UPPER), 3);
 		}
 		world.setBlockState(pos, withAge(newAgeTriedToDestroyTheMetal), 2);
@@ -115,9 +141,15 @@ public class TallCropBlock extends CropBlock {
 		return blockState.getBlock() instanceof TallCropBlock || blockState.getMaterial().isReplaceable();
 	}
 
+	public boolean canGrowUp(BlockView world, BlockPos downPos) {
+		BlockState state = world.getBlockState(downPos.up());
+		return state.getBlock() instanceof TallCropBlock || state.getMaterial().isReplaceable();
+	}
+
 	@Override
 	public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-		return state.get(HALF) == DoubleBlockHalf.LOWER && (state.get(AGE) != getMaxAge() && this.getAge(state) < UPPER_START_AGE - 1);
+		return state.get(HALF) == DoubleBlockHalf.LOWER && (!this.isMature(state) && (this.canGrowUp(world, pos) || this.getAge(state) < UPPER_START_AGE - 1));
+
 	}
 
 	@Override
@@ -125,7 +157,7 @@ public class TallCropBlock extends CropBlock {
 		if (state.get(HALF) == DoubleBlockHalf.LOWER) {
 			return LOWER_SHAPES[state.get(AGE)];
 		}
-		return Block.createCuboidShape(1, 0, 1, 15, 16, 15);
+		return Block.createCuboidShape(0, 0, 0, 16, 16, 16);
 	}
 
 	@Override
@@ -155,7 +187,7 @@ public class TallCropBlock extends CropBlock {
 		LOWER_SHAPES = new VoxelShape[]{
 				Block.createCuboidShape(0, -1, 0, 16, 5, 16),
 				Block.createCuboidShape(0, -1, 0, 16, 10, 16),
-				Block.createCuboidShape(0, -1, 0, 16, 15, 16),
+				Block.createCuboidShape(0, -1, 0, 16, 16, 16),
 				Block.createCuboidShape(0, -1, 0, 16, 16, 16),
 				Block.createCuboidShape(0, -1, 0, 16, 16, 16),
 				FULL_BOTTOM,

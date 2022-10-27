@@ -4,11 +4,9 @@ import dev.sterner.shuckhorror.common.block.CornBreadBlock;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.*;
 import net.minecraft.data.client.model.*;
 import net.minecraft.item.Items;
-import net.minecraft.state.property.Properties;
 
 public class SHModelProvider extends FabricModelProvider {
 	public SHModelProvider(FabricDataGenerator dataGenerator) {
@@ -42,9 +40,9 @@ public class SHModelProvider extends FabricModelProvider {
 		itemModelGenerator.register(SHObjects.GARMONBOZIA, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.POPCORN, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.SICKLE, Models.HANDHELD);
-
 		itemModelGenerator.register(SHObjects.CORN_BREAD, Models.GENERATED);
 
+		itemModelGenerator.register(SHObjects.DEBUG, Items.STICK , Models.GENERATED);
 	}
 
 	private void registerCake(BlockStateModelGenerator blockStateModelGenerator) {
