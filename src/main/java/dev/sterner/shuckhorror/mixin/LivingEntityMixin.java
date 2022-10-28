@@ -14,6 +14,6 @@ public class LivingEntityMixin {
 	@Inject(method = "onDeath", at = @At("HEAD"))
 	private void shuck$onDeath(DamageSource source, CallbackInfo ci){
 		LivingEntity livingEntity = (LivingEntity) (Object) this;
-		EntityDeathEvent.ON_ENTITY_DEATH.invoker().onDeath(livingEntity, livingEntity.getBlockPos());
+		EntityDeathEvent.ON_ENTITY_DEATH.invoker().onDeath(livingEntity, livingEntity.getBlockPos(), source);
 	}
 }

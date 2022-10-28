@@ -6,7 +6,6 @@
   "mixins": [
     "BlockMixin",
     "LivingEntityMixin",
-    "EntityMixin",
     "PollinateGoalMixin",
     "WitchEntityMixin",
     "accessor.SensorTypeAccessor"

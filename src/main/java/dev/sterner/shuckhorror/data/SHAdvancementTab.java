@@ -37,7 +37,7 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 		return new AdvancementDisplay(item.asItem().getDefaultStack(),
 				Text.translatable(Constants.MODID + ".advancement." + titleKey),
 				Text.translatable(Constants.MODID + ".advancement." + titleKey + ".desc"),
-				new Identifier("textures/gui/advancements/backgrounds/adventure.png"),
+				new Identifier("textures/block/raw_gold_block.png"),
 				frame,
 				true,
 				true,
@@ -79,7 +79,7 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 
 		Advancement strikeEntityWithSickle = Advancement.Builder.create()
 				.display(makeDisplay(AdvancementFrame.GOAL, Items.SKELETON_SKULL, "grim_harvest"))
-				.criterion("strike_entity_with_sickle", new HitEntityWithItemCriteria.Conditions(EntityPredicate.Extended.EMPTY, ItemPredicate.Builder.create().items(SHObjects.SICKLE).build(), DamageSourcePredicate.EMPTY, EntityPredicate.Extended.EMPTY))
+				.criterion("strike_entity_with_sickle", new HitEntityWithItemCriteria.Conditions(EntityPredicate.Extended.EMPTY, ItemPredicate.Builder.create().items(SHObjects.SICKLE).items(SHObjects.SCYTHE).build(), DamageSourcePredicate.EMPTY, EntityPredicate.Extended.EMPTY))
 				.parent(killChildOfTheCorn)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/grim_harvest");
 

@@ -1,15 +1,23 @@
 package dev.sterner.shuckhorror.common.util;
 import dev.sterner.shuckhorror.common.block.CornCropBlock;
 import dev.sterner.shuckhorror.common.block.TallCropBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SHUtils {
 
@@ -35,5 +43,12 @@ public class SHUtils {
 			return true;
 		}
 		return false;
+	}
+
+	public static BlockState replant(BlockState state) {
+		if (state.getBlock() instanceof CropBlock cropBlock) {
+			return cropBlock.withAge(0);
+		}
+		return state;
 	}
 }

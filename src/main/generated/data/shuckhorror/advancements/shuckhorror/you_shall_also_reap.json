@@ -18,7 +18,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "minecraft:textures/block/raw_gold_block.png",
     "description": {
       "translate": "shuckhorror.advancement.you_shall_also_reap.desc"
     },
