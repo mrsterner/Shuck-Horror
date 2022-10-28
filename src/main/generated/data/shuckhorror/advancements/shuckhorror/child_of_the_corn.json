@@ -8,7 +8,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "background": "minecraft:textures/block/raw_gold_block.png",
     "description": {
       "translate": "shuckhorror.advancement.child_of_the_corn.desc"
     },

@@ -4,6 +4,7 @@ import dev.sterner.shuckhorror.common.block.CornCropBlock;
 import dev.sterner.shuckhorror.common.block.TallCropBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CropBlock;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,5 +39,12 @@ public class SHUtils {
 			return true;
 		}
 		return false;
+	}
+
+	public static BlockState replant(BlockState state) {
+		if (state.getBlock() instanceof CropBlock cropBlock) {
+			return cropBlock.withAge(0);
+		}
+		return state;
 	}
 }
