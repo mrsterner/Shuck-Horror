@@ -1,10 +1,9 @@
-// 1.19.2	2022-10-28T20:06:45.764633892	Models
+// 1.19.2	2022-10-31T11:11:54.053901164	Models
 20c8f47b356930178db21b94f257105c9402e7bc assets/shuckhorror/models/item/popcorn.json
 8c9e9451baed7dc9bed31a571a582cef21185e5e assets/shuckhorror/models/item/roasted_corn_2.json
 e5753928eb2222362942fba09f62216acd9dfba2 assets/shuckhorror/models/item/cursed_corn_2.json
 98d77c9b92fe1c0fca9a24a96e5ad83d30b15962 assets/shuckhorror/models/item/sickle.json
 b15f8a4cefce128832c1b767a088cfe7f83dff41 assets/shuckhorror/models/item/roasted_corn_3.json
-aba280fe3ddbc6f1b8fc1198bf78d26d8eae70e4 assets/shuckhorror/models/item/corn_bread.json
 7988c61af3a7ddcf8927740437243832e9b49d32 assets/shuckhorror/blockstates/wild_maize.json
 b389359ed32d66f812b9b7ac8db56066c0736860 assets/shuckhorror/models/item/cursed_corn_kernels.json
 aeac594d2085649f5bc9dc5f09617cac05f03a5f assets/shuckhorror/models/item/corn_1.json

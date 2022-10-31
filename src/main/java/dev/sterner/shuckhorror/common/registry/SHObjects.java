@@ -32,19 +32,19 @@ public class SHObjects {
 
 	//Items
 	public static final Item DEBUG = register("debug", new SHDebugStick(new Item.Settings()));
-	public static final Item CORN_BREAD = register("corn_bread", new AliasedBlockItem(CORN_BREAD_BLOCK, genSettings()));
+	//TODO public static final Item CORN_BREAD = register("corn_bread", new AliasedBlockItem(CORN_BREAD_BLOCK, genSettings()));
 
-	public static final Item CORN_COB_1 = register("corn_1", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 1, false));
-	public static final Item CORN_COB_2 = register("corn_2", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 2, false));
-	public static final Item CORN_COB_3 = register("corn_3", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 3, false));
+	public static final Item CORN_COB_1 = register("corn_1", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 1, 1));
+	public static final Item CORN_COB_2 = register("corn_2", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 2, 1));
+	public static final Item CORN_COB_3 = register("corn_3", new CornItem(genSettings().food(Items.PORKCHOP.getFoodComponent()), 3, 1));
 
-	public static final Item CURSED_CORN_1 = register("cursed_corn_1", new CornItem(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent()), 1, true));
-	public static final Item CURSED_CORN_2 = register("cursed_corn_2", new CornItem(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent()), 2, true));
-	public static final Item CURSED_CORN_3 = register("cursed_corn_3", new CornItem(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent()), 2, true));
+	public static final Item CURSED_CORN_1 = register("cursed_corn_1", new CornItem(genSettings().food(Items.COOKED_PORKCHOP.getFoodComponent()), 1, 2));
+	public static final Item CURSED_CORN_2 = register("cursed_corn_2", new CornItem(genSettings().food(Items.COOKED_PORKCHOP.getFoodComponent()), 2, 2));
+	public static final Item CURSED_CORN_3 = register("cursed_corn_3", new CornItem(genSettings().food(Items.COOKED_PORKCHOP.getFoodComponent()), 3, 2));
 
-	public static final Item ROASTED_CORN_1 = register("roasted_corn_1", new Item(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent())));
-	public static final Item ROASTED_CORN_2 = register("roasted_corn_2", new Item(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent())));
-	public static final Item ROASTED_CORN_3 = register("roasted_corn_3", new Item(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent())));
+	public static final Item ROASTED_CORN_1 = register("roasted_corn_1", new CornItem(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent()), 1, 3));
+	public static final Item ROASTED_CORN_2 = register("roasted_corn_2", new CornItem(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent()), 2, 3));
+	public static final Item ROASTED_CORN_3 = register("roasted_corn_3", new CornItem(genSettings().food(Items.COOKED_CHICKEN.getFoodComponent()), 3, 3));
 
 	public static final Item CORN_KERNELS = register("corn_kernels", new AliasedBlockItem(CORN_CROP, genSettings()));
 	public static final Item CURSED_CORN_KERNELS = register("cursed_corn_kernels", new AliasedBlockItem(CURSED_CORN_CROP, genSettings()));

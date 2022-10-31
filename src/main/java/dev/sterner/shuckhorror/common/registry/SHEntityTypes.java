@@ -17,6 +17,7 @@ import java.util.Map;
 public class SHEntityTypes {
 	private static final Map<EntityType<?>, Identifier> ENTITY_TYPES = new LinkedHashMap<>();
 
+	/*TODO
 	public static final EntityType<CornCoblinEntity> CORN_COBLIN = register("corn_coblin", FabricEntityTypeBuilder
 			.<CornCoblinEntity>createMob()
 			.spawnGroup(SpawnGroup.MONSTER)
@@ -32,6 +33,8 @@ public class SHEntityTypes {
 			.defaultAttributes(ChildOfTheCornEntity::createChildOfTheCornAttributes)
 			.dimensions(EntityDimensions.fixed(1f, 1f))
 			.build());
+
+	 */
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type) {
 		ENTITY_TYPES.put(type, Constants.id(name));

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_corn": {
+    "has_corn_kernels": {
       "conditions": {
         "items": [
           {
             "items": [
-              "shuckhorror:corn_1"
+              "shuckhorror:corn_kernels"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "shuckhorror:corn_bread"
+        "recipe": "minecraft:popcorn_from_campfire_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_corn",
+      "has_corn_kernels",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "shuckhorror:corn_bread"
+      "minecraft:popcorn_from_campfire_cooking"
     ]
   }
 }

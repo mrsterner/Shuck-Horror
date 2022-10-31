@@ -72,13 +72,27 @@ public class TallCropBlock extends CropBlock {
 	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!world.isClient) {
 			if (player.isCreative()) {
-				TallPlantBlock.onBreakInCreative(world, pos, state, player);
+				onBreakInCreative(world, pos, state, player);
 			} else {
 				dropStacks(state, world, pos, null, player, player.getMainHandStack());
 			}
 		}
 
 		super.onBreak(world, pos, state, player);
+	}
+
+	public static void onBreakInCreative(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)state.get(HALF);
+		if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
+			BlockPos blockPos = pos.down();
+			BlockState blockState = world.getBlockState(blockPos);
+			if (blockState.isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
+				BlockState blockState2 = blockState.contains(Properties.WATERLOGGED) && (Boolean)blockState.get(Properties.WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
+				world.setBlockState(blockPos, blockState2, 35);
+				world.syncWorldEvent(player, 2001, blockPos, Block.getRawIdFromState(blockState));
+			}
+		}
+
 	}
 
 	@Override

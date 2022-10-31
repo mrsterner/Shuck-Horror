@@ -1,9 +1,11 @@
 package dev.sterner.shuckhorror.data;
 
 import dev.sterner.shuckhorror.common.block.CornCropBlock;
+import dev.sterner.shuckhorror.common.block.TallCropBlock;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
@@ -20,14 +22,14 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 
 	@Override
 	protected void generateBlockLootTables() {
-		LootCondition.Builder cornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4));
-		LootCondition.Builder cornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5));
+		LootCondition.Builder cornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4).exactMatch(TallCropBlock.HALF, DoubleBlockHalf.UPPER));
+		LootCondition.Builder cornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5).exactMatch(TallCropBlock.HALF, DoubleBlockHalf.UPPER));
 
-		LootCondition.Builder cursedCornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CURSED_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4));
-		LootCondition.Builder cursedCornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CURSED_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5));
+		LootCondition.Builder cursedCornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CURSED_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4).exactMatch(TallCropBlock.HALF, DoubleBlockHalf.UPPER));
+		LootCondition.Builder cursedCornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CURSED_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5).exactMatch(TallCropBlock.HALF, DoubleBlockHalf.UPPER));
 
-		LootCondition.Builder candyCornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CANDY_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4));
-		LootCondition.Builder candyCornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CANDY_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5));
+		LootCondition.Builder candyCornBuilder4 = BlockStatePropertyLootCondition.builder(SHObjects.CANDY_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 4).exactMatch(TallCropBlock.HALF, DoubleBlockHalf.UPPER));
+		LootCondition.Builder candyCornBuilder5 = BlockStatePropertyLootCondition.builder(SHObjects.CANDY_CORN_CROP).properties(StatePredicate.Builder.create().exactMatch(CornCropBlock.AGE, 5).exactMatch(TallCropBlock.HALF, DoubleBlockHalf.UPPER));
 
 		this.addDrop(SHObjects.WILD_MAIZE, SHObjects.CORN_KERNELS);
 
