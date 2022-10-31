@@ -40,7 +40,7 @@ public class SHModelProvider extends FabricModelProvider {
 		itemModelGenerator.register(SHObjects.GARMONBOZIA, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.POPCORN, Models.GENERATED);
 		itemModelGenerator.register(SHObjects.SICKLE, Models.HANDHELD);
-		itemModelGenerator.register(SHObjects.CORN_BREAD, Models.GENERATED);
+		//TODO itemModelGenerator.register(SHObjects.CORN_BREAD, Models.GENERATED);
 
 		itemModelGenerator.register(SHObjects.DEBUG, Items.STICK , Models.GENERATED);
 	}

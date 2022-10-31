@@ -11,6 +11,7 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonFactory;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.tag.ItemTags;
 
 import java.util.function.Consumer;
@@ -22,6 +23,7 @@ public class SHRecipeProvider extends FabricRecipeProvider {
 
 	@Override
 	protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+		/*TODO
 		ShapedRecipeJsonFactory.create(SHObjects.CORN_BREAD)
 				.input('h', Items.HONEY_BOTTLE)
 				.input('c', SHObjects.CORN_COB_1)
@@ -32,6 +34,8 @@ public class SHRecipeProvider extends FabricRecipeProvider {
 				.pattern("cmc")
 				.criterion("has_corn", conditionsFromItem(SHObjects.CORN_COB_1))
 				.offerTo(exporter);
+
+		 */
 
 		ShapedRecipeJsonFactory.create(SHObjects.GARMONBOZIA)
 				.input('c', SHObjects.CURSED_CORN_1)
@@ -121,6 +125,10 @@ public class SHRecipeProvider extends FabricRecipeProvider {
 				.criterion("has_corn", conditionsFromItem(SHObjects.CORN_COB_1)).offerTo(exporter);;
 
 
+		offerCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, SHObjects.CORN_COB_1, SHObjects.ROASTED_CORN_1, 0.35F);
+		offerCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, SHObjects.CORN_COB_1, SHObjects.ROASTED_CORN_1, 0.35F);
+		offerCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, SHObjects.CORN_KERNELS, SHObjects.POPCORN, 0.35F);
+		offerCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, SHObjects.CORN_KERNELS, SHObjects.POPCORN, 0.35F);
 
 
 

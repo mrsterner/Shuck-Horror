@@ -23,7 +23,8 @@
           "block": "shuckhorror:cursed_corn_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "4"
+            "age": "4",
+            "half": "upper"
           }
         }
       ],
@@ -42,7 +43,8 @@
           "block": "shuckhorror:cursed_corn_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "5"
+            "age": "5",
+            "half": "upper"
           }
         }
       ],

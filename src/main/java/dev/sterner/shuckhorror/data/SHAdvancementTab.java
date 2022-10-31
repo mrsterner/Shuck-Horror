@@ -28,8 +28,8 @@ import java.util.function.Consumer;
 public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 	private static final Item[] FOOD_ITEMS = new Item[]{
 			SHObjects.CURSED_CORN_1,
-			SHObjects.ROASTED_CORN_1,
-			SHObjects.CORN_BREAD
+			SHObjects.ROASTED_CORN_1
+			//TODO SHObjects.CORN_BREAD
 	};
 
 
@@ -59,6 +59,7 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 				.parent(root)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/cursed_corn");
 
+		/*TODO
 		Advancement encounterCornCoblin = Advancement.Task.create()
 				.display(makeDisplay(AdvancementFrame.TASK, SHObjects.POPCORN, "corn_coblin"))
 				.criterion("encounter_corn_coblin", OnEntityTargetPlayerCriteria.Conditions.create(EntityPredicate.Extended.EMPTY, EntityPredicate.Extended.ofLegacy(EntityPredicate.Builder.create().type(SHEntityTypes.CORN_COBLIN).build())))
@@ -77,18 +78,23 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 				.parent(encounterChildOfTheCorn)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/you_shall_also_reap");
 
+
+
 		Advancement strikeEntityWithSickle = Advancement.Task.create()
 				.display(makeDisplay(AdvancementFrame.GOAL, Items.SKELETON_SKULL, "grim_harvest"))
 				.criterion("strike_entity_with_sickle", new HitEntityWithItemCriteria.Conditions(EntityPredicate.Extended.EMPTY, ItemPredicate.Builder.create().items(SHObjects.SICKLE).items(SHObjects.SCYTHE).build(), DamageSourcePredicate.EMPTY, EntityPredicate.Extended.EMPTY))
 				.parent(killChildOfTheCorn)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/grim_harvest");
 
+
+		 */
 		Advancement candyCorn = Advancement.Task.create()
 				.display(makeDisplay(AdvancementFrame.TASK, SHObjects.CANDY_CORN, "obtain"))
 				.criterion("inventory_changed", InventoryChangedCriterion.Conditions.items(SHObjects.CANDY_CORN))
 				.parent(encounterCuredCornCrop)
 				.build(advancementConsumer, "shuckhorror:shuckhorror/halloween_classic");
 
+		/*TODO
 		this.requireFoodItemsEaten(
 				Advancement.Task.create())
 				.parent(root)
@@ -96,6 +102,8 @@ public class SHAdvancementTab implements Consumer<Consumer<Advancement>> {
 				.rewards(AdvancementRewards.Builder.experience(100))
 				.build(advancementConsumer, "shuckhorror:shuckhorror/cornn_flaek");
 
+
+		 */
 	}
 
 	private Advancement.Task requireFoodItemsEaten(Advancement.Task builder) {

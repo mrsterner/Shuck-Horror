@@ -15,20 +15,20 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 public class  CornItem extends Item {
+	private final int progress;
 	private final int variant;
-	private final boolean cursed;
 	private static final int MAX_USE_TIME = 40;
 
-	public CornItem(Settings settings, int variant, boolean cursed) {
+	public CornItem(Settings settings, int progress, int variant) {
 		super(settings);
+		this.progress = progress;
 		this.variant = variant;
-		this.cursed = cursed;
 	}
-
-	private ItemStack getNextEatingStack(int variant, boolean cursed){
-		return new ItemStack(switch (variant) {
-			case 1 -> cursed ? SHObjects.CURSED_CORN_2: SHObjects.CORN_COB_2;
-			case 2 -> cursed ? SHObjects.CURSED_CORN_3: SHObjects.CORN_COB_3;
+	//normal = 1, cursed = 2, roasted = 3
+	private ItemStack getNextEatingStack(int progress, int variant){
+		return new ItemStack(switch (progress) {
+			case 1 -> variant == 1 ? SHObjects.CORN_COB_2 : variant == 2 ? SHObjects.CURSED_CORN_2 : SHObjects.ROASTED_CORN_2;
+			case 2 -> variant == 1 ? SHObjects.CORN_COB_3 : variant == 2 ? SHObjects.CURSED_CORN_3 : SHObjects.ROASTED_CORN_3;
 			default -> ItemStack.EMPTY.getItem();
 		});
 	}
@@ -41,12 +41,12 @@ public class  CornItem extends Item {
 			serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
 		}
 
-		if(cursed){
+		if(variant == 2){
 			//TODO cursed stuff
 		}
 
 		if (user instanceof PlayerEntity playerEntity && !playerEntity.getAbilities().creativeMode) {
-			ItemStack corn = getNextEatingStack(variant, cursed);
+			ItemStack corn = getNextEatingStack(progress, variant);
 			if (!playerEntity.getInventory().insertStack(corn)) {
 				playerEntity.dropItem(corn, false);
 			}
