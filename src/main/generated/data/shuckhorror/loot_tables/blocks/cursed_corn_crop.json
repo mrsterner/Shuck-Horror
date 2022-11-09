@@ -8,16 +8,6 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "shuckhorror:cursed_corn_kernels"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
       "conditions": [
         {
           "block": "shuckhorror:cursed_corn_crop",

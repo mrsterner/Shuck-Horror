@@ -1,5 +1,5 @@
-// 1.19.2	2022-10-31T11:11:54.055051902	Block Loot Tables
-080b4e573e9cbb8d1d9724eebc7bdfad4967d04d data/shuckhorror/loot_tables/blocks/cursed_corn_crop.json
-e05398d46d04123ce4dea223863d61a59fe2f113 data/shuckhorror/loot_tables/blocks/corn_crop.json
-aa4842398fe0602faacea6f0199a2e72b546b06e data/shuckhorror/loot_tables/blocks/candy_corn_crop.json
+// 1.19.2	2022-10-31T15:48:48.293110199	Block Loot Tables
+bb871d658d579cf80d846045217d7144634d562c data/shuckhorror/loot_tables/blocks/cursed_corn_crop.json
+10f78f21ca35e36adff5e013a025982ede6d7e8f data/shuckhorror/loot_tables/blocks/corn_crop.json
+3acfb1b313808231e0e5dc9d5462db4b8ad39237 data/shuckhorror/loot_tables/blocks/candy_corn_crop.json
 2c0fab2f39b6986106e200503f2d90cf120641b1 data/shuckhorror/loot_tables/blocks/wild_maize.json

@@ -25,16 +25,16 @@ public class SHEntityTypes {
 			.defaultAttributes(CornCoblinEntity::createCornCoblinAttributes)
 			.dimensions(EntityDimensions.fixed(1f, 1f))
 			.build());
-
+*/
 	public static final EntityType<ChildOfTheCornEntity> CHILD_OF_THE_CORN = register("child_of_the_corn", FabricEntityTypeBuilder
 			.<ChildOfTheCornEntity>createMob()
 			.spawnGroup(SpawnGroup.MONSTER)
 			.entityFactory(ChildOfTheCornEntity::new)
 			.defaultAttributes(ChildOfTheCornEntity::createChildOfTheCornAttributes)
-			.dimensions(EntityDimensions.fixed(1f, 1f))
+			.dimensions(EntityDimensions.fixed(0.6f, 1.95f))
 			.build());
 
-	 */
+
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> type) {
 		ENTITY_TYPES.put(type, Constants.id(name));

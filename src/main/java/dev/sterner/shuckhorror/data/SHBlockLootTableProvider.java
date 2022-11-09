@@ -5,13 +5,18 @@ import dev.sterner.shuckhorror.common.block.TallCropBlock;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.enums.DoubleBlockHalf;
+import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.entry.LeafEntry;
+import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.predicate.StatePredicate;
 
@@ -37,8 +42,6 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 				SHObjects.CORN_CROP,
 				LootTable.builder()
 						.pool(LootPool.builder()
-								.with(ItemEntry.builder(SHObjects.CORN_KERNELS)))
-						.pool(LootPool.builder()
 								.conditionally(cornBuilder4)
 								.with(ItemEntry.builder(SHObjects.CORN_COB_1)))
 						.pool(LootPool.builder()
@@ -51,8 +54,6 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 		this.addDrop(SHObjects.CANDY_CORN_CROP, applyExplosionDecay(
 						SHObjects.CANDY_CORN_CROP,
 						LootTable.builder()
-								.pool(LootPool.builder()
-										.with(ItemEntry.builder(SHObjects.CORN_KERNELS)))
 								.pool(LootPool.builder()
 										.conditionally(candyCornBuilder4)
 										.with(ItemEntry.builder(SHObjects.CANDY_CORN)))
@@ -67,8 +68,6 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 						SHObjects.CURSED_CORN_CROP,
 						LootTable.builder()
 								.pool(LootPool.builder()
-										.with(ItemEntry.builder(SHObjects.CURSED_CORN_KERNELS)))
-								.pool(LootPool.builder()
 										.conditionally(cursedCornBuilder4)
 										.with(ItemEntry.builder(SHObjects.CURSED_CORN_1)))
 								.pool(LootPool.builder()
@@ -76,7 +75,17 @@ public class SHBlockLootTableProvider  extends FabricBlockLootTableProvider {
 										.with(ItemEntry.builder(SHObjects.CURSED_CORN_1)))
 				)
 		);
-	}
 
+
+
+	}
+	public static LootTable.Builder cropDrops(Block crop, Item product, Item seeds, LootCondition.Builder condition) {
+		return BlockLootTableGenerator.applyExplosionDecay(crop, LootTable.builder()
+				.pool(LootPool.builder()
+						.with((ItemEntry.builder(product).conditionally(condition)).alternatively(ItemEntry.builder(seeds))))
+				.pool(LootPool.builder().conditionally(condition)
+						.with((ItemEntry.builder(seeds)
+								.apply(ApplyBonusLootFunction.binomialWithBonusCount(Enchantments.FORTUNE, 0.5714286f, 3))))));
+	}
 
 }

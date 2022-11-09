@@ -8,7 +8,8 @@
     "LivingEntityMixin",
     "PollinateGoalMixin",
     "WitchEntityMixin",
-    "accessor.SensorTypeAccessor"
+    "accessor.SensorTypeAccessor",
+    "accessor.SpawnRestrictionAccessor"
   ],
   "client": [
     "client.ItemRendererMixin",
