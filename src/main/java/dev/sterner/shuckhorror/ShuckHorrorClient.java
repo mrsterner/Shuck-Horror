@@ -1,6 +1,7 @@
 package dev.sterner.shuckhorror;
 
 import dev.sterner.shuckhorror.client.model.ChildOfTheCornModel;
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulEntityParticlesPacket;
 import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.client.renderer.ChildOfTheCornRenderer;
 import dev.sterner.shuckhorror.client.renderer.ScytheItemRenderer;
@@ -25,6 +26,7 @@ public class ShuckHorrorClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),SHObjects.CORN_CROP, SHObjects.CURSED_CORN_CROP, SHObjects.CANDY_CORN_CROP, SHObjects.WILD_MAIZE);
 		ClientPlayNetworking.registerGlobalReceiver(SpawnSoulParticlesPacket.ID, SpawnSoulParticlesPacket::handle);
+		ClientPlayNetworking.registerGlobalReceiver(SpawnSoulEntityParticlesPacket.ID, SpawnSoulEntityParticlesPacket::handle);
 		EntityModelLayerRegistry.registerModelLayer(ChildOfTheCornModel.LAYER_LOCATION, ChildOfTheCornModel::createBodyLayer);
 		EntityRendererRegistry.register(SHEntityTypes.CHILD_OF_THE_CORN, ChildOfTheCornRenderer::new);
 

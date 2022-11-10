@@ -3,8 +3,11 @@ package dev.sterner.shuckhorror.common.entity;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
 import dev.sterner.shuckhorror.api.criteria.SHCriteria;
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulEntityParticlesPacket;
+import dev.sterner.shuckhorror.client.network.packet.SpawnSoulParticlesPacket;
 import dev.sterner.shuckhorror.common.entity.ai.ChildOfTheCornBrain;
 import dev.sterner.shuckhorror.common.registry.SHObjects;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.brain.Brain;
@@ -21,6 +24,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -81,7 +85,7 @@ public class ChildOfTheCornEntity extends HostileEntity {
 		return (i & mask) != 0;
 	}
 
-	private void setVexFlag(int mask, boolean value) {
+	private void setChildFlag(int mask, boolean value) {
 		int i = this.dataTracker.get(CHILD_FLAGS);
 		i = value ? (i |= mask) : (i &= ~mask);
 		this.dataTracker.set(CHILD_FLAGS, (byte)(i & 0xFF));
@@ -92,7 +96,7 @@ public class ChildOfTheCornEntity extends HostileEntity {
 	}
 
 	public void setCharging(boolean charging) {
-		this.setVexFlag(CHARGING_FLAG, charging);
+		this.setChildFlag(CHARGING_FLAG, charging);
 	}
 
 	@Override
@@ -104,7 +108,13 @@ public class ChildOfTheCornEntity extends HostileEntity {
 		this.dataTracker.startTracking(CHILD_FLAGS, (byte)0);
 	}
 
-
+	@Override
+	protected void updatePostDeath() {
+		if (!this.world.isClient()) {
+			PlayerLookup.tracking(this).forEach(trackingPlayer -> SpawnSoulEntityParticlesPacket.send(trackingPlayer, this));
+		}
+		super.updatePostDeath();
+	}
 
 	@Override
 	public void readCustomDataFromNbt(NbtCompound nbt) {
@@ -164,7 +174,11 @@ public class ChildOfTheCornEntity extends HostileEntity {
 	}
 
 	public static boolean canSpawn(EntityType<ChildOfTheCornEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		return world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+		if(world.getDimension().getMoonPhase(world.getLunarTime()) == 4){
+			return world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+		}else{
+			return world.getRandom().nextBoolean() && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+		}
 	}
 
 	/* TODO Brain
