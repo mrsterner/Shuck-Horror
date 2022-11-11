@@ -175,10 +175,29 @@ public class ChildOfTheCornEntity extends HostileEntity {
 
 	public static boolean canSpawn(EntityType<ChildOfTheCornEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		if(world.getDimension().getMoonPhase(world.getLunarTime()) == 4){
-			return world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+			return findCursedCorn(world, pos) && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
 		}else{
-			return world.getRandom().nextBoolean() && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+			return findCursedCorn(world, pos) && world.getRandom().nextBoolean() && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
 		}
+	}
+
+	public static boolean findCursedCorn(ServerWorldAccess world, BlockPos pos){
+		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		int i = 5;
+		int j = 5;
+		for(int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
+			for(int l = 0; l < i; ++l) {
+				for(int m = 0; m <= l; m = m > 0 ? -m : 1 - m) {
+					for(int n = m < l && m > -l ? l : 0; n <= l; n = n > 0 ? -n : 1 - n) {
+						mutable.set(pos, m, k - 1, n);
+						if (world.getBlockState(mutable).isOf(SHObjects.CURSED_CORN_CROP)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/* TODO Brain
