@@ -108,10 +108,10 @@ public class TallCropBlock extends CropBlock {
 				return false;
 			}
 			BlockState blockstate = world.getBlockState(pos.down());
-			if (!state.isIn(Constants.Tags.CORN)){
+			if (!blockstate.isIn(Constants.Tags.CORN)){
 				return super.canPlaceAt(state, world, pos);
 			}
-			return state.isIn(Constants.Tags.CORN) && blockstate.get(HALF) == DoubleBlockHalf.LOWER && this.getAge(state) == this.getAge(blockstate);
+			return blockstate.isIn(Constants.Tags.CORN) && blockstate.get(HALF) == DoubleBlockHalf.LOWER && this.getAge(state) == this.getAge(blockstate);
 		}
 	}
 

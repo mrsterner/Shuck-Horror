@@ -11,6 +11,7 @@ import dev.sterner.shuckhorror.common.registry.SHWorldGenerators;
 import dev.sterner.shuckhorror.common.util.Constants;
 import dev.sterner.shuckhorror.common.util.SHUtils;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.Block;
@@ -40,6 +41,9 @@ import net.minecraft.world.event.GameEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShuckHorror implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Shuck Horror");
 
@@ -50,14 +54,41 @@ public class ShuckHorror implements ModInitializer {
 		SHWorldGenerators.init();
 		SHBrains.init();
 		SHCriteria.init();
-		EntityDeathEvent.ON_ENTITY_DEATH.register(this::curseCornOnDeath);
-		EntityDeathEvent.ON_ENTITY_DEATH.register(this::onGrimReap);
+		ServerLivingEntityEvents.AFTER_DEATH.register(this::curseCornOnDeath);
+		ServerLivingEntityEvents.AFTER_DEATH.register(this::onGrimReap);
 		UseBlockCallback.EVENT.register(this::onScytheHarvest);
 		AttackBlockCallback.EVENT.register(this::onScytheHarvest);
 
 	}
 
-	private void onGrimReap(LivingEntity livingEntity, BlockPos blockPos, DamageSource source) {
+	private void curseCornOnDeath(LivingEntity livingEntity, DamageSource damageSource) {
+		BlockPos blockPos = livingEntity.getBlockPos();
+
+		BlockPos origo = blockPos.add(-1,0,-1);
+		List<BlockPos> listPos = new ArrayList<>();
+		for(int x = 0; x < 3; x++){
+			for(int z = 0; z < 3; z++){
+				for (int y = 0; y < 3; y++){
+					BlockPos checkPos = origo.add(x,y,z);
+					if(livingEntity.world.getBlockState(checkPos).isOf(SHObjects.CORN_CROP) && livingEntity.world.getRandom().nextBoolean()){
+						listPos.add(checkPos);
+					}
+
+				}
+			}
+		}
+		listPos.forEach(blockPos1 -> {
+			SHUtils.transferBlockState(livingEntity.world, blockPos1, SHObjects.CURSED_CORN_CROP.getDefaultState());
+			if (livingEntity.world.getBlockState(blockPos1.up()).isOf(SHObjects.CORN_CROP)) {
+				SHUtils.transferBlockState(livingEntity.world, blockPos1.up(), SHObjects.CURSED_CORN_CROP.getDefaultState());
+			}
+			if (livingEntity.world.getBlockState(blockPos1.down()).isOf(SHObjects.CORN_CROP)) {
+				SHUtils.transferBlockState(livingEntity.world, blockPos1.down(), SHObjects.CURSED_CORN_CROP.getDefaultState());
+			}
+		});
+	}
+
+	private void onGrimReap(LivingEntity livingEntity, DamageSource source) {
 		if(source.getAttacker() instanceof ServerPlayerEntity playerEntity){
 			if(playerEntity.getMainHandStack().isOf(SHObjects.SCYTHE) || playerEntity.getMainHandStack().isOf(SHObjects.SICKLE)){
 				if(playerEntity.getWorld().getRandom().nextDouble() < 0.1){
@@ -129,29 +160,6 @@ public class ShuckHorror implements ModInitializer {
 			return newHarvestMethod(playerEntity, world, blockHitResult.getBlockPos(), 1);
 		}
 		return ActionResult.PASS;
-	}
-
-
-	private void curseCornOnDeath(LivingEntity livingEntity, BlockPos blockPos, DamageSource source) {
-		int range = 2;
-		for(int i = -range; i < range; i++){
-			for(int j = -range; j < range; j++){
-				for(int k = -range; k < range; k++){
-					blockPos.add(i ,j ,k);
-					if (livingEntity.world.getBlockState(blockPos).isOf(SHObjects.CORN_CROP)) {
-						SHUtils.transferBlockState(livingEntity.world, blockPos, SHObjects.CURSED_CORN_CROP.getDefaultState());
-						if (livingEntity.world.getBlockState(blockPos.up()).isOf(SHObjects.CORN_CROP)) {
-							SHUtils.transferBlockState(livingEntity.world, blockPos.up(), SHObjects.CURSED_CORN_CROP.getDefaultState());
-						}
-						if (livingEntity.world.getBlockState(blockPos.down()).isOf(SHObjects.CORN_CROP)) {
-							SHUtils.transferBlockState(livingEntity.world, blockPos.down(), SHObjects.CURSED_CORN_CROP.getDefaultState());
-						}
-
-					}
-				}
-			}
-		}
-
 	}
 }
 
