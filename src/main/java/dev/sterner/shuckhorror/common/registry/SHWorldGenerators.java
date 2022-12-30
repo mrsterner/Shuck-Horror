@@ -47,14 +47,17 @@ public class SHWorldGenerators {
 				ModificationPhase.ADDITIONS,
 				BiomeSelectors.tag(ConventionalBiomeTags.JUNGLE).or(BiomeSelectors.tag(ConventionalBiomeTags.PLAINS)),
 				context -> context.getGenerationSettings().addBuiltInFeature(GenerationStep.Feature.VEGETAL_DECORATION, PATCH_WILD_MAIZE.value()));
-
-	if (registerEntitySpawn(SHEntityTypes.CHILD_OF_THE_CORN,
+	/*
+		if (registerEntitySpawn(SHEntityTypes.CHILD_OF_THE_CORN,
 			BiomeSelectors.foundInOverworld().and(context -> !context.getBiome().getSpawnSettings().getSpawnEntries(SHEntityTypes.CHILD_OF_THE_CORN.getSpawnGroup()).isEmpty()),
 			20, 1, 1)) {
 			SpawnRestrictionAccessor.callRegister(SHEntityTypes.CHILD_OF_THE_CORN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChildOfTheCornEntity::canSpawn);
 		}
+		*/
 	}
 
+
+	/*
 	private static boolean registerEntitySpawn(EntityType<?> type, Predicate<BiomeSelectionContext> predicate, int weight, int minGroupSize, int maxGroupSize) {
 		if (weight < 0) {
 			throw new UnsupportedOperationException("Could not register entity type " + type.getTranslationKey() + ": weight " + weight + " cannot be negative.");
@@ -70,4 +73,6 @@ public class SHWorldGenerators {
 		BiomeModifications.addSpawn(predicate, type.getSpawnGroup(), type, weight, minGroupSize, maxGroupSize);
 		return true;
 	}
+
+	 */
 }

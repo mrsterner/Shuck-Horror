@@ -34,6 +34,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.WanderingTraderManager;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,7 +71,7 @@ public class ChildOfTheCornEntity extends HostileEntity {
 		this.goalSelector.add(5, new FlyRandomlyGoal());
 		this.goalSelector.add(6, new LookAtTargetGoal(this));
 		this.targetSelector.add(1, new RevengeGoal(this));
-		this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
 
 	}
 
@@ -173,32 +174,19 @@ public class ChildOfTheCornEntity extends HostileEntity {
 				.add(EntityAttributes.GENERIC_FLYING_SPEED, 0.25);
 	}
 
+	/*
 	public static boolean canSpawn(EntityType<ChildOfTheCornEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+
 		if(world.getDimension().getMoonPhase(world.getLunarTime()) == 4){
-			return findCursedCorn(world, pos) && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+			return world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
 		}else{
-			return findCursedCorn(world, pos) && world.getRandom().nextBoolean() && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
+			return world.getRandom().nextBoolean() && world.toServerWorld().isNight() && HostileEntity.canSpawnInDark(type, world, spawnReason, pos, random);
 		}
 	}
 
-	public static boolean findCursedCorn(ServerWorldAccess world, BlockPos pos){
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		int i = 5;
-		int j = 5;
-		for(int k = 0; k <= j; k = k > 0 ? -k : 1 - k) {
-			for(int l = 0; l < i; ++l) {
-				for(int m = 0; m <= l; m = m > 0 ? -m : 1 - m) {
-					for(int n = m < l && m > -l ? l : 0; n <= l; n = n > 0 ? -n : 1 - n) {
-						mutable.set(pos, m, k - 1, n);
-						if (world.getBlockState(mutable).isOf(SHObjects.CURSED_CORN_CROP)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+	 */
+
+
 
 	/* TODO Brain
 	@Override
